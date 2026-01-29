@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://4oblnclak7h8"]
 
+[ext_resource type="Script" uid="uid://ci6t8i8r5cn54" path="res://scripts/editors/editor_main.gd" id="1_r6l10"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6cjyn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cjyn"]
@@ -18,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_r6l10")
 
 [node name="MousePlane" type="Panel" parent="." unique_id=927235515]
 layout_mode = 1
@@ -26,7 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_6cjyn")
 
 [node name="TopPanelContainer" type="PanelContainer" parent="." unique_id=1435760382]
@@ -55,7 +58,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Save"
 
-[node name="Save As" type="Button" parent="TopPanelContainer/Buttons" unique_id=956733349]
+[node name="SaveAs" type="Button" parent="TopPanelContainer/Buttons" unique_id=956733349]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Save as..."
+
+[node name="Test" type="Button" parent="TopPanelContainer/Buttons" unique_id=153427688]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Test"
