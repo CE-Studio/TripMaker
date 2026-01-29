@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c3658jgdn5hdi"]
+
+[ext_resource type="Script" uid="uid://xee8bvyng6in" path="res://scripts/editors/timelines/beat_editor_timeline.gd" id="1_e3m2j"]
+
+[node name="BeatEditorTimeline" type="Node2D" unique_id=182580332]
+script = ExtResource("1_e3m2j")
+sidescrolling = true

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://4oblnclak7h8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6cjyn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cjyn"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.16470589)
+
+[node name="EditorMain" type="Control" unique_id=2036191018]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MousePlane" type="Panel" parent="." unique_id=927235515]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6cjyn")
+
+[node name="TopPanelContainer" type="PanelContainer" parent="." unique_id=1435760382]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6cjyn")
+
+[node name="Buttons" type="HBoxContainer" parent="TopPanelContainer" unique_id=1852390231]
+layout_mode = 2
+
+[node name="New" type="Button" parent="TopPanelContainer/Buttons" unique_id=1353833332]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "New"
+
+[node name="Open" type="Button" parent="TopPanelContainer/Buttons" unique_id=1836631169]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Open"
+
+[node name="Save" type="Button" parent="TopPanelContainer/Buttons" unique_id=1173502793]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Save"
+
+[node name="Save As" type="Button" parent="TopPanelContainer/Buttons" unique_id=956733349]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Save as..."

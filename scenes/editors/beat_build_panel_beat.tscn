@@ -1,0 +1,253 @@
+[gd_scene format=3 uid="uid://b8rb76dje3i1f"]
+
+[ext_resource type="Texture2D" uid="uid://1eoch6m8ug60" path="res://assets/images/editor/beat/IconBeatNormal.png" id="1_m5ouq"]
+[ext_resource type="Texture2D" uid="uid://cfm0d7xsrsful" path="res://assets/images/editor/beat/IconBeatOverlap.png" id="2_v452s"]
+[ext_resource type="Texture2D" uid="uid://dpry84m76p3ka" path="res://assets/images/editor/beat/IconBeatAvoid.png" id="3_lbt2o"]
+[ext_resource type="Texture2D" uid="uid://cpycq0viej2m3" path="res://assets/images/editor/beat/IconBeatBonus.png" id="4_fslgv"]
+[ext_resource type="Texture2D" uid="uid://cuswbienuvl5m" path="res://assets/images/editor/beat/IconBeatBouncer.png" id="5_ap8ox"]
+[ext_resource type="Texture2D" uid="uid://djvaegmuoig15" path="res://assets/images/editor/beat/IconBeatFirework.png" id="6_0d3wp"]
+[ext_resource type="Texture2D" uid="uid://did134rpnjl8j" path="res://assets/images/editor/beat/IconBeatFollow.png" id="7_us4ul"]
+[ext_resource type="Texture2D" uid="uid://cyd83dcboi6s5" path="res://assets/images/editor/beat/IconBeatGeo.png" id="8_4qabv"]
+[ext_resource type="Texture2D" uid="uid://bhn3ohy3ktqxq" path="res://assets/images/editor/beat/IconBeatInvis.png" id="9_e7wxu"]
+[ext_resource type="Texture2D" uid="uid://jhmcutc43rr6" path="res://assets/images/editor/beat/IconBeatJuggle.png" id="10_tehst"]
+[ext_resource type="Texture2D" uid="uid://djae4tmfhrdra" path="res://assets/images/editor/beat/IconBeatRotator.png" id="11_s7ngl"]
+[ext_resource type="Texture2D" uid="uid://duqjmeld3s3hm" path="res://assets/images/editor/beat/IconBeatScaler.png" id="12_q7wde"]
+[ext_resource type="Texture2D" uid="uid://cimangtwswwt0" path="res://assets/images/editor/beat/IconBeatStunner.png" id="13_cw4ue"]
+[ext_resource type="Texture2D" uid="uid://kgncv3qqt6uo" path="res://assets/images/editor/beat/IconBeatStutter.png" id="14_aemgi"]
+[ext_resource type="Texture2D" uid="uid://svkwxilwcik2" path="res://assets/images/editor/beat/IconBeatTrail.png" id="15_xw7rm"]
+[ext_resource type="Texture2D" uid="uid://dqs6il6q2hamd" path="res://assets/images/editor/beat/IconBeatWaver.png" id="16_2rnu7"]
+[ext_resource type="Texture2D" uid="uid://bmabihykgy2a7" path="res://assets/images/editor/beat/IconBeatAdd.png" id="17_us4ul"]
+[ext_resource type="Texture2D" uid="uid://5fim3503ii5t" path="res://assets/images/editor/beat/IconBeatSubtract.png" id="18_4qabv"]
+[ext_resource type="Texture2D" uid="uid://dbubq3dqg8qo2" path="res://assets/images/editor/beat/IconBeatMultiply.png" id="19_e7wxu"]
+[ext_resource type="Texture2D" uid="uid://rtggqpt03vu3" path="res://assets/images/editor/beat/IconBeatDivide.png" id="20_tehst"]
+[ext_resource type="Texture2D" uid="uid://0mbiye6uwgnx" path="res://assets/images/editor/beat/IconBeatSeries.png" id="21_s7ngl"]
+[ext_resource type="Texture2D" uid="uid://cayl7hohpr4qq" path="res://assets/images/editor/beat/IconBeatReverse.png" id="22_q7wde"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvhgy"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.21568628)
+
+[node name="BeatBuildPanel" type="Control" unique_id=211217856]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1864950721]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kvhgy")
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer" unique_id=1603351577]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 12
+
+[node name="Normal" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1403430879]
+layout_mode = 2
+tooltip_text = "Normal Beat"
+texture_normal = ExtResource("1_m5ouq")
+texture_pressed = ExtResource("1_m5ouq")
+texture_hover = ExtResource("1_m5ouq")
+texture_disabled = ExtResource("1_m5ouq")
+texture_focused = ExtResource("1_m5ouq")
+
+[node name="Overlap" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=755053097]
+layout_mode = 2
+tooltip_text = "Overlapping Beats"
+texture_normal = ExtResource("2_v452s")
+texture_pressed = ExtResource("2_v452s")
+texture_hover = ExtResource("2_v452s")
+texture_disabled = ExtResource("2_v452s")
+texture_focused = ExtResource("2_v452s")
+
+[node name="Scaler" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1364082906]
+layout_mode = 2
+tooltip_text = "Scaler Beat"
+texture_normal = ExtResource("12_q7wde")
+texture_pressed = ExtResource("12_q7wde")
+texture_hover = ExtResource("12_q7wde")
+texture_disabled = ExtResource("12_q7wde")
+texture_focused = ExtResource("12_q7wde")
+
+[node name="Bouncer" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=596595003]
+layout_mode = 2
+tooltip_text = "Bouncer Beat"
+texture_normal = ExtResource("5_ap8ox")
+texture_pressed = ExtResource("5_ap8ox")
+texture_hover = ExtResource("5_ap8ox")
+texture_disabled = ExtResource("5_ap8ox")
+texture_focused = ExtResource("5_ap8ox")
+
+[node name="Juggle" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1541366837]
+layout_mode = 2
+tooltip_text = "Juggle Beat"
+texture_normal = ExtResource("10_tehst")
+texture_pressed = ExtResource("10_tehst")
+texture_hover = ExtResource("10_tehst")
+texture_disabled = ExtResource("10_tehst")
+texture_focused = ExtResource("10_tehst")
+
+[node name="Invis" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=182940650]
+layout_mode = 2
+tooltip_text = "Invisibeat"
+texture_normal = ExtResource("9_e7wxu")
+texture_pressed = ExtResource("9_e7wxu")
+texture_hover = ExtResource("9_e7wxu")
+texture_disabled = ExtResource("9_e7wxu")
+texture_focused = ExtResource("9_e7wxu")
+
+[node name="Waver" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=514937900]
+layout_mode = 2
+tooltip_text = "Wave Beat"
+texture_normal = ExtResource("16_2rnu7")
+texture_pressed = ExtResource("16_2rnu7")
+texture_hover = ExtResource("16_2rnu7")
+texture_disabled = ExtResource("16_2rnu7")
+texture_focused = ExtResource("16_2rnu7")
+
+[node name="Stutter" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=504195196]
+layout_mode = 2
+tooltip_text = "Stutter Beat"
+texture_normal = ExtResource("14_aemgi")
+texture_pressed = ExtResource("14_aemgi")
+texture_hover = ExtResource("14_aemgi")
+texture_disabled = ExtResource("14_aemgi")
+texture_focused = ExtResource("14_aemgi")
+
+[node name="Trail" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=609621034]
+layout_mode = 2
+tooltip_text = "Trail Beat"
+texture_normal = ExtResource("15_xw7rm")
+texture_pressed = ExtResource("15_xw7rm")
+texture_hover = ExtResource("15_xw7rm")
+texture_disabled = ExtResource("15_xw7rm")
+texture_focused = ExtResource("15_xw7rm")
+
+[node name="Follow" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1953155856]
+layout_mode = 2
+tooltip_text = "Follow Beat"
+texture_normal = ExtResource("7_us4ul")
+texture_pressed = ExtResource("7_us4ul")
+texture_hover = ExtResource("7_us4ul")
+texture_disabled = ExtResource("7_us4ul")
+texture_focused = ExtResource("7_us4ul")
+
+[node name="Rotator" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1006276640]
+layout_mode = 2
+tooltip_text = "Rotating Beat structure"
+texture_normal = ExtResource("11_s7ngl")
+texture_pressed = ExtResource("11_s7ngl")
+texture_hover = ExtResource("11_s7ngl")
+texture_disabled = ExtResource("11_s7ngl")
+texture_focused = ExtResource("11_s7ngl")
+
+[node name="Firework" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=179159617]
+layout_mode = 2
+tooltip_text = "Firework Beat"
+texture_normal = ExtResource("6_0d3wp")
+texture_pressed = ExtResource("6_0d3wp")
+texture_hover = ExtResource("6_0d3wp")
+texture_disabled = ExtResource("6_0d3wp")
+texture_focused = ExtResource("6_0d3wp")
+
+[node name="Geo" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1317490431]
+layout_mode = 2
+tooltip_text = "Geometry Beat structure"
+texture_normal = ExtResource("8_4qabv")
+texture_pressed = ExtResource("8_4qabv")
+texture_hover = ExtResource("8_4qabv")
+texture_disabled = ExtResource("8_4qabv")
+texture_focused = ExtResource("8_4qabv")
+
+[node name="Stunner" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=125835417]
+layout_mode = 2
+tooltip_text = "Stunner Beat"
+texture_normal = ExtResource("13_cw4ue")
+texture_pressed = ExtResource("13_cw4ue")
+texture_hover = ExtResource("13_cw4ue")
+texture_disabled = ExtResource("13_cw4ue")
+texture_focused = ExtResource("13_cw4ue")
+
+[node name="Avoid" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=2081424270]
+layout_mode = 2
+tooltip_text = "Avoid Beat"
+texture_normal = ExtResource("3_lbt2o")
+texture_pressed = ExtResource("3_lbt2o")
+texture_hover = ExtResource("3_lbt2o")
+texture_disabled = ExtResource("3_lbt2o")
+texture_focused = ExtResource("3_lbt2o")
+
+[node name="Bonus" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=2137604596]
+layout_mode = 2
+tooltip_text = "Bonus Beat"
+texture_normal = ExtResource("4_fslgv")
+texture_pressed = ExtResource("4_fslgv")
+texture_hover = ExtResource("4_fslgv")
+texture_disabled = ExtResource("4_fslgv")
+texture_focused = ExtResource("4_fslgv")
+
+[node name="PowerupAdd" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1511042229]
+layout_mode = 2
+tooltip_text = "Powerup: Add"
+texture_normal = ExtResource("17_us4ul")
+texture_pressed = ExtResource("17_us4ul")
+texture_hover = ExtResource("17_us4ul")
+texture_disabled = ExtResource("17_us4ul")
+texture_focused = ExtResource("17_us4ul")
+
+[node name="PowerupSubtract" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=130681086]
+layout_mode = 2
+tooltip_text = "Challenge: Subtract"
+texture_normal = ExtResource("18_4qabv")
+texture_pressed = ExtResource("18_4qabv")
+texture_hover = ExtResource("18_4qabv")
+texture_disabled = ExtResource("18_4qabv")
+texture_focused = ExtResource("18_4qabv")
+
+[node name="PowerupMultiply" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=903499135]
+layout_mode = 2
+tooltip_text = "Powerup: Multiply"
+texture_normal = ExtResource("19_e7wxu")
+texture_pressed = ExtResource("19_e7wxu")
+texture_hover = ExtResource("19_e7wxu")
+texture_disabled = ExtResource("19_e7wxu")
+texture_focused = ExtResource("19_e7wxu")
+
+[node name="PowerupDivide" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=1548007651]
+layout_mode = 2
+tooltip_text = "Powerup: Divide"
+texture_normal = ExtResource("20_tehst")
+texture_pressed = ExtResource("20_tehst")
+texture_hover = ExtResource("20_tehst")
+texture_disabled = ExtResource("20_tehst")
+texture_focused = ExtResource("20_tehst")
+
+[node name="PowerupSeries" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=731684060]
+layout_mode = 2
+tooltip_text = "Powerup: Series"
+texture_normal = ExtResource("21_s7ngl")
+texture_pressed = ExtResource("21_s7ngl")
+texture_hover = ExtResource("21_s7ngl")
+texture_disabled = ExtResource("21_s7ngl")
+texture_focused = ExtResource("21_s7ngl")
+
+[node name="PowerupReverse" type="TextureButton" parent="PanelContainer/GridContainer" unique_id=479878310]
+layout_mode = 2
+tooltip_text = "Challenge: Reverse"
+texture_normal = ExtResource("22_q7wde")
+texture_pressed = ExtResource("22_q7wde")
+texture_hover = ExtResource("22_q7wde")
+texture_disabled = ExtResource("22_q7wde")
+texture_focused = ExtResource("22_q7wde")

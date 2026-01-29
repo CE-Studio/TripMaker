@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://chjflsmnmstq7"]
+
+[ext_resource type="PackedScene" uid="uid://c3658jgdn5hdi" path="res://scenes/editors/beat_editor_timeline.tscn" id="1_b1cmn"]
+[ext_resource type="Script" uid="uid://mmgaf8m2xuwp" path="res://scripts/editors/editor_scene.gd" id="1_ba0ut"]
+[ext_resource type="PackedScene" uid="uid://4oblnclak7h8" path="res://scenes/editors/editor_main.tscn" id="1_pxqd5"]
+[ext_resource type="PackedScene" uid="uid://b8rb76dje3i1f" path="res://scenes/editors/beat_build_panel_beat.tscn" id="3_q68jb"]
+
+[node name="EditorRoot" type="Node2D" unique_id=1580143505 node_paths=PackedStringArray("ui_main", "active_timeline", "camera")]
+script = ExtResource("1_ba0ut")
+ui_main = NodePath("UICanvasLayer/EditorMain")
+active_timeline = NodePath("BeatEditorTimeline")
+camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1483603225]
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=986144587]
+layer = 100
+
+[node name="EditorMain" parent="UICanvasLayer" unique_id=2036191018 instance=ExtResource("1_pxqd5")]
+
+[node name="BeatBuildPanel" parent="UICanvasLayer/EditorMain" unique_id=211217856 instance=ExtResource("3_q68jb")]
+layout_mode = 1
+
+[node name="BeatEditorTimeline" parent="." unique_id=182580332 instance=ExtResource("1_b1cmn")]
