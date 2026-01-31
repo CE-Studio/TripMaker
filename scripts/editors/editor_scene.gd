@@ -18,7 +18,7 @@ var window_size:Vector2i:
 
 static var instance:EditorScene
 
-@export var ui_main:EditorMain
+@export var ui_main:EditorUI
 @export var active_timeline:EditorTimeline
 @export var camera:Camera2D
 #endregion
@@ -48,19 +48,19 @@ func _input(event: InputEvent) -> void:
 			camera.position.x = clampf(camera.position.x, CAM_MIN_X, cam_max_x)
 
 
-func append_section(x_offset:float = 0.0, x_add_mod:float = 0.0) -> void:
-	var new_section:Section = Section.new()
-	new_section.id = EditorMain.section_data.size()
-	new_section.start_beat = EditorMain.total_section_beats
-	new_section.start_x = EditorMain.total_section_x + x_offset
-	EditorMain.section_data.append(new_section)
-	EditorMain.total_section_beats += new_section.beats
-	EditorMain.total_section_x += new_section.beats * x_add_mod
+#func append_section(x_offset:float = 0.0, x_add_mod:float = 0.0) -> void:
+#	var new_section:Section = Section.new()
+#	new_section.id = EditorMain.section_data.size()
+#	new_section.start_beat = EditorMain.total_section_beats
+#	new_section.start_x = EditorMain.total_section_x + x_offset
+#	EditorMain.section_data.append(new_section)
+#	EditorMain.total_section_beats += new_section.beats
+#	EditorMain.total_section_x += new_section.beats * x_add_mod
 
 
-func get_section_from_x(x:float) -> int:
-	var closest_i:int = 0
-	for i in range(EditorMain.section_data.size()):
-		if EditorMain.section_data[i].start_x < x:
-			closest_i = EditorMain.section_data[i].id
-	return closest_i
+#func get_section_from_x(x:float) -> int:
+#	var closest_i:int = 0
+#	for i in range(EditorMain.section_data.size()):
+#		if EditorMain.section_data[i].start_x < x:
+#			closest_i = EditorMain.section_data[i].id
+#	return closest_i

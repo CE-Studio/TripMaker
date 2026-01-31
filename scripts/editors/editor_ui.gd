@@ -1,4 +1,4 @@
-class_name EditorMain
+class_name EditorUI
 extends Control
 
 
@@ -9,7 +9,7 @@ var build_panel_visible:bool:
 			return active_build_panel.panel_visible
 		return false
 
-static var instance:EditorMain
+static var instance:EditorUI
 
 static var section_data:Array[Section]
 static var total_section_beats:int = 0

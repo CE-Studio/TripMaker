@@ -1,15 +1,6 @@
 [gd_scene format=3 uid="uid://c3658jgdn5hdi"]
 
 [ext_resource type="Script" uid="uid://xee8bvyng6in" path="res://scripts/editors/timelines/beat_editor_timeline.gd" id="1_e3m2j"]
-[ext_resource type="Texture2D" uid="uid://bw0wsfy3txmdk" path="res://assets/images/Square.png" id="2_1ptoq"]
-[ext_resource type="PackedScene" uid="uid://dunmp80gyd3bt" path="res://scenes/editors/beat_editor_object.tscn" id="2_2ur5d"]
 
-[node name="BeatEditorTimeline" type="Node2D" unique_id=182580332 node_paths=PackedStringArray("highlight")]
+[node name="BeatEditorTimeline" type="Node2D" unique_id=182580332]
 script = ExtResource("1_e3m2j")
-editor_obj = ExtResource("2_2ur5d")
-sidescrolling = true
-highlight = NodePath("Highlight")
-
-[node name="Highlight" type="Sprite2D" parent="." unique_id=1850425375]
-modulate = Color(0, 0, 0, 0.23529412)
-texture = ExtResource("2_1ptoq")

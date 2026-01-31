@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://4oblnclak7h8"]
 
-[ext_resource type="Script" uid="uid://ci6t8i8r5cn54" path="res://scripts/editors/editor_main.gd" id="1_r6l10"]
+[ext_resource type="Script" uid="uid://ci6t8i8r5cn54" path="res://scripts/editors/editor_ui.gd" id="1_r6l10"]
+[ext_resource type="PackedScene" uid="uid://b8rb76dje3i1f" path="res://scenes/editors/build_panel_beat.tscn" id="2_hia2q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6cjyn"]
 
@@ -11,7 +12,7 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0, 0, 0, 0.16470589)
 
-[node name="EditorMain" type="Control" unique_id=2036191018]
+[node name="EditorUI" type="Control" unique_id=2036191018]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,3 +68,6 @@ text = "Save as..."
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Test"
+
+[node name="BeatBuildPanel" parent="." unique_id=211217856 instance=ExtResource("2_hia2q")]
+layout_mode = 1

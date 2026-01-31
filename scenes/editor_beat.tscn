@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://chjflsmnmstq7"]
+
+[ext_resource type="Script" uid="uid://bkmjp7up1oegg" path="res://scripts/editors/editor_beat.gd" id="1_v1drp"]
+[ext_resource type="PackedScene" uid="uid://4oblnclak7h8" path="res://scenes/editors/editor_ui.tscn" id="2_f2j0l"]
+[ext_resource type="PackedScene" uid="uid://c3658jgdn5hdi" path="res://scenes/editors/beat_editor_timeline.tscn" id="4_tfiqv"]
+[ext_resource type="Texture2D" uid="uid://bw0wsfy3txmdk" path="res://assets/images/Square.png" id="4_v1drp"]
+
+[node name="EditorRoot" type="Node2D" unique_id=1580143505 node_paths=PackedStringArray("highlight", "camera", "ui", "beat_group")]
+script = ExtResource("1_v1drp")
+highlight = NodePath("Highlight")
+camera = NodePath("Camera2D")
+ui = NodePath("UICanvasLayer/EditorMain")
+beat_group = NodePath("BeatGroup")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1483603225]
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=986144587]
+layer = 100
+
+[node name="EditorMain" parent="UICanvasLayer" unique_id=2036191018 node_paths=PackedStringArray("active_build_panel", "main_scene") instance=ExtResource("2_f2j0l")]
+active_build_panel = NodePath("BeatBuildPanel")
+main_scene = NodePath("../..")
+
+[node name="BeatEditorTimeline" parent="." unique_id=182580332 node_paths=PackedStringArray("editor") instance=ExtResource("4_tfiqv")]
+editor = NodePath("..")
+
+[node name="BeatGroup" type="Node2D" parent="." unique_id=1853149840]
+
+[node name="Highlight" type="Sprite2D" parent="." unique_id=417581694]
+modulate = Color(0, 0, 0, 0.23529412)
+texture = ExtResource("4_v1drp")

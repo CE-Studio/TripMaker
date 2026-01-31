@@ -26,20 +26,3 @@ func _ready() -> void:
 	if main_editor:
 		for i in range(sections):
 			main_editor.append_section()
-
-
-func move_highlight(new_pos:Vector2) -> void:
-	if highlight:
-		highlight.position = new_pos
-	highlighted_position = new_pos
-
-
-func place_obj(obj:PackedScene, section:int, pos:Vector2) -> void:
-	var new_obj:EditorObject = obj.instantiate()
-	if new_obj is BeatEditorObject:
-		new_obj.type = EditorMain.instance.active_build_panel.selected_element
-	new_obj.section = section
-	new_obj.position = pos
-	new_obj.timeline = self
-	EditorMain.section_data[section].objects.append(new_obj)
-	add_child(new_obj)
