@@ -22,11 +22,15 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not Statics.editor_accepts_inputs:
+		return
 	if event.is_action_pressed(&"ui_toggle"):
 		toggle_palette()
 
 
 func toggle_palette() -> void:
+	if not Statics.editor_accepts_inputs:
+		return
 	panel_visible = not panel_visible
 	palette.visible = panel_visible
 	toggle_button.text = "V V V" if panel_visible else "^ ^ ^"

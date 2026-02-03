@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="TripMaker"
+config/name="BIT.TRIP Maker"
+config/version="0.1.0"
 run/main_scene="uid://chjflsmnmstq7"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"

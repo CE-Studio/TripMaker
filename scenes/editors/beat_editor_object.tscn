@@ -15,10 +15,14 @@ sprite = NodePath("Sprite2D")
 z_index = 1
 texture = ExtResource("1_w6y1o")
 
-[node name="ClickArea" type="StaticBody2D" parent="." unique_id=1399821926]
+[node name="ClickBody" type="StaticBody2D" parent="." unique_id=1399821926]
 collision_layer = 2
 collision_mask = 0
 input_pickable = true
 
-[node name="ClickBox" type="CollisionShape2D" parent="ClickArea" unique_id=688758411]
+[node name="ClickBox" type="CollisionShape2D" parent="ClickBody" unique_id=688758411]
 shape = SubResource("RectangleShape2D_tcdj4")
+
+[connection signal="input_event" from="ClickBody" to="." method="_on_click_body_input_event"]
+[connection signal="mouse_entered" from="ClickBody" to="." method="_on_click_body_mouse_entered"]
+[connection signal="mouse_exited" from="ClickBody" to="." method="_on_click_body_mouse_exited"]

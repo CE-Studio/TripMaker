@@ -13,6 +13,8 @@ func _ready() -> void:
 
 
 func _on_pressed():
+	if not Statics.editor_accepts_inputs:
+		return
 	if editor:
 		if editor.selected_element == my_element:
 			editor.set_selected(-1)

@@ -39,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_4qabv")
 editor_obj = ExtResource("2_e7wxu")
 toggle_button = NodePath("Main/HBoxContainer/PanelToggle")
@@ -54,6 +55,7 @@ anchor_bottom = 1.0
 offset_top = -192.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main" unique_id=1678294705]
@@ -77,6 +79,7 @@ theme_override_constants/separation = 24
 [node name="SelectedLabel" type="RichTextLabel" parent="Main/HBoxContainer" unique_id=1148191524]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "Beat name here"

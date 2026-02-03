@@ -2,6 +2,8 @@ class_name Statics
 extends Node
 
 
+static var editor_accepts_inputs:bool = true
+
 enum BeatObjs {
 	NORMAL,
 	OVERLAP,

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d2dq2m1c8ecnj"]
+
+[ext_resource type="Texture2D" uid="uid://bw0wsfy3txmdk" path="res://assets/images/Square.png" id="1_gxlip"]
+[ext_resource type="Script" uid="uid://b5nw44t5evotk" path="res://scripts/editors/highlight.gd" id="1_mffkr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mffkr"]
+size = Vector2(48, 48)
+
+[node name="Highlight" type="Node2D" unique_id=1032740751]
+script = ExtResource("1_mffkr")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2095374136]
+modulate = Color(0, 0, 0, 0.23529412)
+texture = ExtResource("1_gxlip")
+
+[node name="ClickBody" type="StaticBody2D" parent="." unique_id=1885202972]
+collision_layer = 2
+collision_mask = 0
+input_pickable = true
+
+[node name="ClickBox" type="CollisionShape2D" parent="ClickBody" unique_id=1953021764]
+shape = SubResource("RectangleShape2D_mffkr")
+
+[connection signal="input_event" from="ClickBody" to="." method="_on_click_body_input_event"]

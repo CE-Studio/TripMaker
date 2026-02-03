@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://ci6t8i8r5cn54" path="res://scripts/editors/editor_ui.gd" id="1_r6l10"]
 [ext_resource type="PackedScene" uid="uid://b8rb76dje3i1f" path="res://scenes/editors/build_panel_beat.tscn" id="2_hia2q"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6cjyn"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cjyn"]
 content_margin_left = 8.0
 content_margin_top = 8.0
@@ -12,7 +10,7 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0, 0, 0, 0.16470589)
 
-[node name="EditorUI" type="Control" unique_id=2036191018]
+[node name="EditorUI" type="Control" unique_id=2036191018 node_paths=PackedStringArray("active_build_panel", "debug_label", "saved_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,17 +19,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_r6l10")
-
-[node name="MousePlane" type="Panel" parent="." unique_id=927235515]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6cjyn")
+script = ExtResource("1_r6l10")
+active_build_panel = NodePath("BeatBuildPanel")
+debug_label = NodePath("DebugInfo")
+saved_label = NodePath("TopPanelContainer/Buttons/SavedLevel")
 
 [node name="TopPanelContainer" type="PanelContainer" parent="." unique_id=1435760382]
 custom_minimum_size = Vector2(0, 48)
@@ -69,5 +61,29 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Test"
 
+[node name="SavedLevel" type="RichTextLabel" parent="TopPanelContainer/Buttons" unique_id=1575967952]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 24
+text = "Untitled.json"
+fit_content = true
+vertical_alignment = 2
+
 [node name="BeatBuildPanel" parent="." unique_id=211217856 instance=ExtResource("2_hia2q")]
 layout_mode = 1
+
+[node name="DebugInfo" type="RichTextLabel" parent="." unique_id=1771943771]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 57.0
+offset_right = 1082.0
+offset_bottom = 379.0
+mouse_filter = 2
+text = "Highlighted position: (0, 0)
+Selected beat type: 0"
+
+[connection signal="pressed" from="TopPanelContainer/Buttons/New" to="." method="_on_new_pressed"]
+[connection signal="pressed" from="TopPanelContainer/Buttons/Open" to="." method="_on_open_pressed"]
+[connection signal="pressed" from="TopPanelContainer/Buttons/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="TopPanelContainer/Buttons/SaveAs" to="." method="_on_save_as_pressed"]
+[connection signal="pressed" from="TopPanelContainer/Buttons/Test" to="." method="_on_test_pressed"]

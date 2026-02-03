@@ -10,6 +10,8 @@ const TEXT_COLOR:Color = Color(1.0, 1.0, 1.0, 0.75)
 const SECTION_NUM_SIZE:int = 64
 const BEAT_NUM_SIZE:int = 20
 
+static var instance:EditorBeat
+
 var origin:Vector2 = Vector2(0.0, -200.0)
 var grid_scale:Vector2 = Vector2(80.0, 28.0)
 var grid_subdivs:Vector2 = Vector2(0.5, 1.0)
@@ -39,16 +41,29 @@ var global_mouse_position:Vector2 = Vector2.ZERO
 var highlighted_position:Vector2 = Vector2.ZERO
 var mouse_in_bounds:bool = false
 
-@export var highlight:Node2D
+var objects:Array[BeatEditorObject] = []
+var last_found_i:int = -1
+
+@export var file_handler:FileHandler
+@export var highlight:Highlight
 @export var camera:Camera2D
 @export var ui:Control
 @export var beat_group:Node2D
+@export var beat_object:PackedScene
 #endregion
+
+
+func _ready() -> void:
+	instance = self
+	if highlight:
+		highlight.connect("clicked_left", place_obj)
+		highlight.connect("clicked_right", remove_obj)
+	assert(file_handler, "Editor scene requires a FileHandler node")
 
 
 func move_highlight(new_pos:Vector2) -> void:
 	mouse_in_bounds = false
-	if new_pos.x >= 0.0 and new_pos.y >= 0.0 and new_pos.y < vertical_divisions:
+	if new_pos.x >= 0.0 and new_pos.y >= 0.0 and new_pos.y <= vertical_divisions:
 		mouse_in_bounds = true
 	highlight.position = Vector2(
 		clampf(highlighted_position.x, 0.0, INF),
@@ -57,6 +72,8 @@ func move_highlight(new_pos:Vector2) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not Statics.editor_accepts_inputs:
+		return
 	if event is InputEventMouseMotion:
 		var window:Vector2 = window_size
 		var pos:Vector2 = Vector2(event.position)
@@ -79,15 +96,48 @@ func _input(event: InputEvent) -> void:
 			camera.position.x = clampf(camera.position.x, cam_min_x, cam_max_x)
 
 
-func place_obj(obj:PackedScene, section:int, pos:Vector2) -> void:
-	var new_obj:EditorObject = obj.instantiate()
-	#if new_obj is BeatEditorObject:
-	#	new_obj.type = EditorMain.instance.active_build_panel.selected_element
-	#new_obj.section = section
-	#new_obj.position = pos
-	#EditorMain.section_data[section].objects.append(new_obj)
-	#add_child(new_obj)
+func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_element) -> void:
+	if not Statics.editor_accepts_inputs or not mouse_in_bounds:
+		return
+	if type != Statics.BeatObjs.NONE and not check_position_occupied(pos):
+		var new_obj:BeatEditorObject = beat_object.instantiate()
+		new_obj.editor = self
+		new_obj.type = type as Statics.BeatObjs
+		new_obj.beat = pos.x
+		new_obj.y = pos.y
+		beat_group.add_child(new_obj)
+		new_obj._process(0.0)
+		objects.append(new_obj)
+		#print("Placed new object of type %s at %s" % [type, pos])
+
+
+func remove_obj(pos:Vector2 = highlighted_position) -> void:
+	if not Statics.editor_accepts_inputs or not mouse_in_bounds:
+		return
+	var obj:BeatEditorObject = check_position_occupied(pos)
+	if obj:
+		objects.remove_at(last_found_i)
+		obj.queue_free()
 
 
 #func update_cam_max() -> void:
 #	cam_max_x = GRID_SIZE.x * sections * SECTION_SIZE + (ORIGIN.x * 2)
+
+
+func check_position_occupied(pos:Vector2) -> BeatEditorObject:
+	var out_obj:BeatEditorObject = null
+	var i:int = 0
+	while i < objects.size() and out_obj == null:
+		var this_obj = objects[i]
+		if Vector2(this_obj.beat, this_obj.y) == pos:
+			out_obj = this_obj
+			last_found_i = i
+		i += 1
+	return out_obj
+
+
+func reset_all() -> void:
+	for i in objects:
+		i.queue_free()
+	objects.clear()
+	file_handler.last_loaded_path = ""
