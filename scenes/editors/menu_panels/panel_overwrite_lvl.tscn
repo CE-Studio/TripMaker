@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cwu7be5yb7i8g"]
+
+[ext_resource type="Script" uid="uid://c344q8kxuksno" path="res://scripts/editors/menu_panels/panel_overwrite_lvl.gd" id="1_vongj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q54lg"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 0.37254903)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="PanelOverwriteLvl" type="PanelContainer" unique_id=2087422717 node_paths=PackedStringArray("text")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q54lg")
+script = ExtResource("1_vongj")
+text = NodePath("VBoxContainer/RichTextLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=839315968]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=169918457]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "\"%s\" already exists. Are you sure you want to overwrite an existing level?"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2059546782]
+layout_mode = 2
+alignment = 1
+
+[node name="Yes" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=473361320]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Yes"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer" unique_id=1250179847]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="No" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1398795551]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "No"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Yes" to="." method="_on_yes"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/No" to="." method="_on_no"]

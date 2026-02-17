@@ -47,9 +47,13 @@ var last_found_i:int = -1
 @export var file_handler:FileHandler
 @export var highlight:Highlight
 @export var camera:Camera2D
-@export var ui:Control
+@export var ui:EditorUI
 @export var beat_group:Node2D
 @export var beat_object:PackedScene
+
+signal edit_made
+signal object_placed
+signal object_removed
 #endregion
 
 
@@ -109,6 +113,8 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 		new_obj._process(0.0)
 		objects.append(new_obj)
 		#print("Placed new object of type %s at %s" % [type, pos])
+		edit_made.emit()
+		object_placed.emit()
 
 
 func remove_obj(pos:Vector2 = highlighted_position) -> void:
@@ -118,6 +124,8 @@ func remove_obj(pos:Vector2 = highlighted_position) -> void:
 	if obj:
 		objects.remove_at(last_found_i)
 		obj.queue_free()
+		edit_made.emit()
+		object_removed.emit()
 
 
 #func update_cam_max() -> void:
@@ -141,3 +149,4 @@ func reset_all() -> void:
 		i.queue_free()
 	objects.clear()
 	file_handler.last_loaded_path = ""
+	ui.set_saved_label_text("")

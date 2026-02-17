@@ -6,13 +6,13 @@ extends Node
 const LEVEL_PATH:String = "user://levels/"
 const LEVEL_EXT:String = ".btlvl"
 
-const BASE_DICT:Dictionary = {
+var BASE_DICT:Dictionary = {
 	&"name": "Untitled",
 	&"author": "Unknown",
 	&"game_ver": "0.1.0",
 	&"sections": []
 }
-const SECTION_DICT:Dictionary = {
+var SECTION_DICT:Dictionary = {
 	&"id": 0,
 	&"type": "beat",
 	&"beats": []
@@ -35,10 +35,21 @@ func save_level(lvl_name:String, notes:Array):
 		new_section[&"beats"].append("0:%s;1:%s;2:%s" % [i.beat, i.type, i.y])
 	new_dict[&"sections"].append(new_section)
 	
-	var file := FileAccess.open(LEVEL_PATH + lvl_name + LEVEL_EXT, FileAccess.READ_WRITE)
+	new_dict[&"name"] = lvl_name
+	var file := FileAccess.open(LEVEL_PATH + lvl_name + LEVEL_EXT, FileAccess.WRITE)
 	file.store_string(JSON.stringify(new_dict, "\t", false))
 	file.close()
+	last_loaded_path = lvl_name
+	EditorUI.instance.set_saved_label_text(lvl_name + LEVEL_EXT)
 
 
-func load_level(path:String):
+func load_level(_path:String):
 	pass
+
+
+func level_exists_at_path(path:String) -> bool:
+	return FileAccess.file_exists(path)
+
+
+func level_exists_in_main_folder(lvl_name:String) -> bool:
+	return level_exists_at_path(lvl_name.join([LEVEL_PATH, LEVEL_EXT]))

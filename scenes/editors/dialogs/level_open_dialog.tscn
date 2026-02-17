@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dut1107fogwxn"]
+
+[node name="LevelOpenDialog" type="FileDialog" unique_id=1381413983]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 2
+visible = true
+file_mode = 0
+display_mode = 1
+access = 1
+root_subfolder = "levels"
+filters = PackedStringArray("*.btlvl")

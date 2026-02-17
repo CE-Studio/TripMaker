@@ -61,11 +61,16 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Test"
 
+[node name="VSeparator" type="VSeparator" parent="TopPanelContainer/Buttons" unique_id=2089496568]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
 [node name="SavedLevel" type="RichTextLabel" parent="TopPanelContainer/Buttons" unique_id=1575967952]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 24
-text = "Untitled.json"
+text = "Untitled.btlvl"
 fit_content = true
 vertical_alignment = 2
 

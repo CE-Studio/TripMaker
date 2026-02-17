@@ -9,6 +9,9 @@ var build_panel_visible:bool:
 			return active_build_panel.panel_visible
 		return false
 
+var last_save_label:String = ""
+var level_unsaved:bool = false
+
 static var instance:EditorUI
 
 static var section_data:Array[Section]
@@ -25,6 +28,8 @@ static var total_section_x:float = 0.0
 func _ready() -> void:
 	instance = self
 	saved_label.text = ""
+	if main_scene:
+		main_scene.edit_made.connect(_on_edit_made)
 
 
 func _process(_delta: float) -> void:
@@ -37,11 +42,23 @@ func _process(_delta: float) -> void:
 		)
 
 
-func set_saved_label_text(path:String) -> void:
+func set_saved_label_text(path:String, unsaved:bool = false) -> void:
+	level_unsaved = false
 	if path.strip_edges() == "":
+		saved_label.text = ""
+		last_save_label = ""
 		return
 	var path_parts:PackedStringArray = path.split("/")
 	saved_label.text = path_parts[path_parts.size() - 1]
+	last_save_label = path_parts[path_parts.size() - 1]
+	if unsaved:
+		saved_label.text = "*" + saved_label.text
+		level_unsaved = true
+
+
+func _on_edit_made() -> void:
+	if not level_unsaved and last_save_label != "":
+		set_saved_label_text(last_save_label, true)
 
 
 func _on_new_pressed() -> void:
@@ -54,19 +71,24 @@ func _on_new_pressed() -> void:
 func _on_open_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
-	pass
+	add_child(load("uid://dut1107fogwxn").instantiate())
 
 
 func _on_save_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
-	pass
+	var file:FileHandler = EditorBeat.instance.file_handler
+	if file.last_loaded_path != "":
+		file.save_level(file.last_loaded_path, EditorBeat.instance.objects)
+	else:
+		_on_save_as_pressed()
 
 
 func _on_save_as_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
-	pass
+	Statics.editor_accepts_inputs = false
+	add_child(load("uid://e17vtq3wiqlh").instantiate())
 
 
 func _on_test_pressed() -> void:

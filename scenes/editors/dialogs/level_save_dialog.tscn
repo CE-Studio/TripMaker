@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b58atpeyvuigk"]
+
+[node name="LevelSaveDialog" type="FileDialog" unique_id=1381413983]
+oversampling_override = 1.0
+initial_position = 2
+visible = true
+display_mode = 1
+access = 1
+root_subfolder = "levels"
+filters = PackedStringArray("*.btlvl")
