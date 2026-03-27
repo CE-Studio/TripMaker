@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://csqo6hhmfjhyq"]
+
+[ext_resource type="Texture2D" uid="uid://dg53uli5ibouv" path="res://assets/images/game/huds/hud_beat.png" id="1_3vhut"]
+[ext_resource type="PackedScene" uid="uid://drui8swovfnoe" path="res://scenes/games/players/paddle.tscn" id="1_aicja"]
+[ext_resource type="Script" uid="uid://eib1c6015min" path="res://scripts/games/game_beat.gd" id="1_joj2x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aicja"]
+
+[node name="GameBeat" type="Node2D" unique_id=269319028 node_paths=PackedStringArray("paddle", "debug")]
+script = ExtResource("1_joj2x")
+paddle = NodePath("Paddle")
+debug = NodePath("UICanvasLayer/UI/Debug")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1349249832]
+
+[node name="Paddle" parent="." unique_id=1055088124 instance=ExtResource("1_aicja")]
+position = Vector2(48, 302)
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=1010970436]
+
+[node name="UI" type="Control" parent="UICanvasLayer" unique_id=1147789970]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer/UI" unique_id=905879994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_aicja")
+
+[node name="TextureRect" type="TextureRect" parent="UICanvasLayer/UI/PanelContainer" unique_id=927906696]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_3vhut")
+
+[node name="Score" type="RichTextLabel" parent="UICanvasLayer/UI" unique_id=1953674891]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 1
+offset_left = 48.0
+offset_top = 16.0
+offset_right = 848.0
+offset_bottom = 83.0
+theme_override_font_sizes/normal_font_size = 48
+text = "0000000000"
+fit_content = true
+
+[node name="Combo" type="RichTextLabel" parent="UICanvasLayer/UI" unique_id=1953439283]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -83.0
+offset_right = 848.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 48
+text = "0100 x 0001"
+fit_content = true
+
+[node name="Debug" type="RichTextLabel" parent="UICanvasLayer/UI" unique_id=214198873]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -843.0
+offset_top = 95.0
+offset_right = -43.0
+offset_bottom = 187.0
+grow_horizontal = 0
+text = "0:00.00
+BPM: 120.0
+Beat: 0
+Active objects: 0 (0/0/0)"
+fit_content = true
+horizontal_alignment = 2

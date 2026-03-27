@@ -21,7 +21,7 @@ func _on_save() -> void:
 		overwrite_panel.lvl_name = lvl_name
 		EditorUI.instance.add_child(overwrite_panel)
 	else:
-		file.save_level(lvl_name, EditorBeat.instance.objects)
+		file.save_level_from_name(lvl_name, EditorBeat.instance.objects)
 	_on_cancel()
 
 

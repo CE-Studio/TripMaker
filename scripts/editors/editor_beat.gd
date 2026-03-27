@@ -41,7 +41,7 @@ var global_mouse_position:Vector2 = Vector2.ZERO
 var highlighted_position:Vector2 = Vector2.ZERO
 var mouse_in_bounds:bool = false
 
-var objects:Array[BeatEditorObject] = []
+var objects:Array[EditorObject] = []
 var last_found_i:int = -1
 
 @export var file_handler:FileHandler
@@ -117,6 +117,15 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 		object_placed.emit()
 
 
+func place_loaded_obj(obj:EditorObject) -> void:
+	if obj is BeatEditorObject:
+		obj.editor = self
+	beat_group.add_child(obj)
+	obj._process(0.0)
+	objects.append(obj)
+	object_placed.emit()
+
+
 func remove_obj(pos:Vector2 = highlighted_position) -> void:
 	if not Statics.editor_accepts_inputs or not mouse_in_bounds:
 		return
@@ -149,4 +158,5 @@ func reset_all() -> void:
 		i.queue_free()
 	objects.clear()
 	file_handler.last_loaded_path = ""
+	file_handler.last_loaded_name = ""
 	ui.set_saved_label_text("")

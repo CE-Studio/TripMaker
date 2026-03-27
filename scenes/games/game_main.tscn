@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://oe0hoi334va7"]
+
+[ext_resource type="PackedScene" uid="uid://csqo6hhmfjhyq" path="res://scenes/games/game_beat.tscn" id="1_6xc1c"]
+[ext_resource type="Script" uid="uid://ddjfx4pentdd2" path="res://scripts/games/game_main.gd" id="1_utyx6"]
+
+[node name="GameMain" type="Node2D" unique_id=724906859 node_paths=PackedStringArray("game_beat")]
+script = ExtResource("1_utyx6")
+game_beat = NodePath("GameBeat")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1756032637]
+anchor_mode = 0
+
+[node name="GameBeat" parent="." unique_id=269319028 instance=ExtResource("1_6xc1c")]

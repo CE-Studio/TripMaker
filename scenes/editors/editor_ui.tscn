@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ci6t8i8r5cn54" path="res://scripts/editors/editor_ui.gd" id="1_r6l10"]
 [ext_resource type="PackedScene" uid="uid://b8rb76dje3i1f" path="res://scenes/editors/build_panel_beat.tscn" id="2_hia2q"]
+[ext_resource type="PackedScene" uid="uid://dut1107fogwxn" path="res://scenes/editors/dialogs/level_open_dialog.tscn" id="3_ae3l2"]
+[ext_resource type="PackedScene" uid="uid://b58atpeyvuigk" path="res://scenes/editors/dialogs/level_save_dialog.tscn" id="4_ttcqf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cjyn"]
 content_margin_left = 8.0
@@ -10,7 +12,7 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0, 0, 0, 0.16470589)
 
-[node name="EditorUI" type="Control" unique_id=2036191018 node_paths=PackedStringArray("active_build_panel", "debug_label", "saved_label")]
+[node name="EditorUI" type="Control" unique_id=2036191018 node_paths=PackedStringArray("active_build_panel", "debug_label", "saved_label", "open_dialog", "save_dialog")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +26,8 @@ script = ExtResource("1_r6l10")
 active_build_panel = NodePath("BeatBuildPanel")
 debug_label = NodePath("DebugInfo")
 saved_label = NodePath("TopPanelContainer/Buttons/SavedLevel")
+open_dialog = NodePath("LevelOpenDialog")
+save_dialog = NodePath("LevelSaveDialog")
 
 [node name="TopPanelContainer" type="PanelContainer" parent="." unique_id=1435760382]
 custom_minimum_size = Vector2(0, 48)
@@ -87,8 +91,16 @@ mouse_filter = 2
 text = "Highlighted position: (0, 0)
 Selected beat type: 0"
 
+[node name="LevelOpenDialog" parent="." unique_id=1381413983 instance=ExtResource("3_ae3l2")]
+
+[node name="LevelSaveDialog" parent="." unique_id=895015265 instance=ExtResource("4_ttcqf")]
+
 [connection signal="pressed" from="TopPanelContainer/Buttons/New" to="." method="_on_new_pressed"]
 [connection signal="pressed" from="TopPanelContainer/Buttons/Open" to="." method="_on_open_pressed"]
 [connection signal="pressed" from="TopPanelContainer/Buttons/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="TopPanelContainer/Buttons/SaveAs" to="." method="_on_save_as_pressed"]
 [connection signal="pressed" from="TopPanelContainer/Buttons/Test" to="." method="_on_test_pressed"]
+[connection signal="canceled" from="LevelOpenDialog" to="." method="_on_dialog_cancelled"]
+[connection signal="file_selected" from="LevelOpenDialog" to="." method="_on_open_dialog_file_selected"]
+[connection signal="canceled" from="LevelSaveDialog" to="." method="_on_dialog_cancelled"]
+[connection signal="file_selected" from="LevelSaveDialog" to="." method="_on_save_dialog_file_selected"]

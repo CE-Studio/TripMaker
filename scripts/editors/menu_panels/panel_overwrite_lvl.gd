@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _on_yes() -> void:
-	file.save_level(lvl_name, EditorBeat.instance.objects)
+	file.save_level_from_name(lvl_name, EditorBeat.instance.objects)
 	queue_free()
 
 

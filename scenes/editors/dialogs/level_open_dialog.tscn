@@ -4,7 +4,6 @@
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 2
-visible = true
 file_mode = 0
 display_mode = 1
 access = 1

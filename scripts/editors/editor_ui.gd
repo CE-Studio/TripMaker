@@ -22,6 +22,8 @@ static var total_section_x:float = 0.0
 @export var main_scene:EditorBeat
 @export var debug_label:RichTextLabel
 @export var saved_label:RichTextLabel
+@export var open_dialog:FileDialog
+@export var save_dialog:FileDialog
 #endregion
 
 
@@ -30,6 +32,10 @@ func _ready() -> void:
 	saved_label.text = ""
 	if main_scene:
 		main_scene.edit_made.connect(_on_edit_made)
+	assert(open_dialog, "Editor UI requires a FileDialog to open levels!")
+	assert(save_dialog, "Editor UI requires a FileDialog to save levels!")
+	open_dialog.visible = false
+	save_dialog.visible = false
 
 
 func _process(_delta: float) -> void:
@@ -49,8 +55,10 @@ func set_saved_label_text(path:String, unsaved:bool = false) -> void:
 		last_save_label = ""
 		return
 	var path_parts:PackedStringArray = path.split("/")
-	saved_label.text = path_parts[path_parts.size() - 1]
-	last_save_label = path_parts[path_parts.size() - 1]
+	var lvl_name:String = path_parts[path_parts.size() - 1]
+	lvl_name = lvl_name.replace(FileHandler.LEVEL_EXT, "")
+	saved_label.text = lvl_name
+	last_save_label = lvl_name
 	if unsaved:
 		saved_label.text = "*" + saved_label.text
 		level_unsaved = true
@@ -71,15 +79,18 @@ func _on_new_pressed() -> void:
 func _on_open_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
-	add_child(load("uid://dut1107fogwxn").instantiate())
+	Statics.editor_accepts_inputs = false
+	#add_child(load("uid://dut1107fogwxn").instantiate())
+	open_dialog.popup()
 
 
 func _on_save_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
-	var file:FileHandler = EditorBeat.instance.file_handler
+	var file:FileHandler = FileHandler.instance
 	if file.last_loaded_path != "":
 		file.save_level(file.last_loaded_path, EditorBeat.instance.objects)
+		set_saved_label_text(last_save_label, false)
 	else:
 		_on_save_as_pressed()
 
@@ -88,10 +99,24 @@ func _on_save_as_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
 	Statics.editor_accepts_inputs = false
-	add_child(load("uid://e17vtq3wiqlh").instantiate())
+	save_dialog.popup()
 
 
 func _on_test_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
 	pass
+
+
+func _on_open_dialog_file_selected(path:String) -> void:
+	EditorBeat.instance.reset_all()
+	FileHandler.instance.load_level(path)
+
+
+func _on_save_dialog_file_selected(path:String) -> void:
+	FileHandler.instance.save_level(path, EditorBeat.instance.objects)
+	_on_dialog_cancelled()
+
+
+func _on_dialog_cancelled() -> void:
+	Statics.editor_accepts_inputs = true

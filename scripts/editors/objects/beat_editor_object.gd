@@ -7,9 +7,6 @@ const SCALE_MOD_NOMOUSE:float = 0.75
 const SCALE_MOD_MOUSE:float = 1.0
 const SCALE_MOD_LERP_RATE:float = 24.0
 
-var type:Statics.BeatObjs = Statics.BeatObjs.NONE
-var y:float = 0.0
-var angle:float = 0.0
 var mouse_over:bool = false
 var current_scale:Vector2 = Vector2(0.75, 0.75)
 var current_scale_mod:float = SCALE_MOD_NOMOUSE
