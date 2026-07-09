@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bugi3siejci1"]
+
+[ext_resource type="Texture2D" uid="uid://bw0wsfy3txmdk" path="res://assets/images/Square.png" id="1_isvi4"]
+[ext_resource type="Script" uid="uid://dc3nmy6vegcwk" path="res://scripts/games/beats/beat_object.gd" id="1_p8e81"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8e81"]
+size = Vector2(24, 24)
+
+[node name="BeatObject" type="Area2D" unique_id=1849208227]
+collision_layer = 4
+script = ExtResource("1_p8e81")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=39009657]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_isvi4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=435921811]
+shape = SubResource("RectangleShape2D_p8e81")
+
+[connection signal="area_entered" from="." to="." method="_on_enter_paddle"]
+[connection signal="area_exited" from="." to="." method="_on_exit_paddle"]

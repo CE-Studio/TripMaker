@@ -2,9 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://bjrpaoehax6go" path="res://assets/images/game/players/paddle.png" id="1_xx7nw"]
 
-[node name="Paddle" type="Node2D" unique_id=1055088124]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xx7nw"]
+size = Vector2(96, 48)
+
+[node name="Paddle" type="Area2D" unique_id=357224972]
+collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=831302573]
 texture_filter = 1
 scale = Vector2(6, 6)
 texture = ExtResource("1_xx7nw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1632674214]
+position = Vector2(42, 0)
+shape = SubResource("RectangleShape2D_xx7nw")

@@ -13,7 +13,7 @@ config_version=5
 config/name="BIT.TRIP Maker"
 config/version="0.1.0"
 run/main_scene="uid://chjflsmnmstq7"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -48,6 +48,7 @@ ui_toggle={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="EditorPickable"
+2d_physics/layer_3="GameObject"
 
 [physics]
 
