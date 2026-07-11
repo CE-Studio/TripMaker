@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ccindnq0pb78b"]
+
+[ext_resource type="PackedScene" uid="uid://bugi3siejci1" path="res://scenes/games/beats/beat_object.tscn" id="1_a34cb"]
+
+[node name="TestBeats" type="Node2D" unique_id=1457986379]
+
+[node name="BeatObject" parent="." unique_id=1849208227 instance=ExtResource("1_a34cb")]
+position = Vector2(765, 265)
+target_pos = Vector2(4, 8)
+
+[node name="BeatObject2" parent="." unique_id=157743577 instance=ExtResource("1_a34cb")]
+position = Vector2(793, 293)
+target_pos = Vector2(6, 6)
+
+[node name="BeatObject3" parent="." unique_id=707963118 instance=ExtResource("1_a34cb")]
+position = Vector2(809, 322)
+target_pos = Vector2(8, 12)
+speed = 2.0
+
+[node name="BeatObject4" parent="." unique_id=1869205186 instance=ExtResource("1_a34cb")]
+position = Vector2(846, 306)
+target_pos = Vector2(12, 8)
+
+[node name="BeatObject5" parent="." unique_id=1396467422 instance=ExtResource("1_a34cb")]
+position = Vector2(905, 318)
+target_pos = Vector2(12, 8)
+speed = 2.0
+
+[node name="BeatObject6" parent="." unique_id=1537807878 instance=ExtResource("1_a34cb")]
+position = Vector2(970, 347)
+target_pos = Vector2(15, 8)
+angle = 1.0
+
+[node name="BeatObject7" parent="." unique_id=1809357781 instance=ExtResource("1_a34cb")]
+position = Vector2(983, 307)
+target_pos = Vector2(18, 8)
+speed = 8.0
+angle = 0.5
+
+[node name="BeatObject8" parent="." unique_id=735362104 instance=ExtResource("1_a34cb")]
+position = Vector2(1018, 318)
+target_pos = Vector2(18, 8)
+speed = 8.0
+angle = -0.5
+
+[node name="BeatObject9" parent="." unique_id=616129153 instance=ExtResource("1_a34cb")]
+position = Vector2(1046, 329)
+target_pos = Vector2(18, 8)
+angle = 1.5
+
+[node name="BeatObject10" parent="." unique_id=1168495861 instance=ExtResource("1_a34cb")]
+position = Vector2(1030, 377)
+target_pos = Vector2(18, 8)
+angle = -1.5

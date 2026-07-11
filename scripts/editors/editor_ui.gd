@@ -11,6 +11,7 @@ var build_panel_visible:bool:
 
 var last_save_label:String = ""
 var level_unsaved:bool = false
+var queue_test:bool = false
 
 static var instance:EditorUI
 
@@ -51,8 +52,9 @@ func _process(_delta: float) -> void:
 func set_saved_label_text(path:String, unsaved:bool = false) -> void:
 	level_unsaved = false
 	if path.strip_edges() == "":
-		saved_label.text = ""
+		saved_label.text = "Unsaved*" if unsaved else ""
 		last_save_label = ""
+		level_unsaved = true
 		return
 	var path_parts:PackedStringArray = path.split("/")
 	var lvl_name:String = path_parts[path_parts.size() - 1]
@@ -65,7 +67,7 @@ func set_saved_label_text(path:String, unsaved:bool = false) -> void:
 
 
 func _on_edit_made() -> void:
-	if not level_unsaved and last_save_label != "":
+	if not level_unsaved:# and last_save_label != "":
 		set_saved_label_text(last_save_label, true)
 
 
@@ -80,7 +82,6 @@ func _on_open_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
 	Statics.editor_accepts_inputs = false
-	#add_child(load("uid://dut1107fogwxn").instantiate())
 	open_dialog.popup()
 
 
@@ -105,7 +106,16 @@ func _on_save_as_pressed() -> void:
 func _on_test_pressed() -> void:
 	if not Statics.editor_accepts_inputs:
 		return
-	pass
+	var file:FileHandler = FileHandler.instance
+	if level_unsaved:
+		if file.last_loaded_path == "":
+			queue_test = true
+			_on_save_as_pressed()
+		else:
+			file.save_level(file.last_loaded_path, EditorBeat.instance.objects)
+			_change_to_game_scene()
+	else:
+		_change_to_game_scene()
 
 
 func _on_open_dialog_file_selected(path:String) -> void:
@@ -115,8 +125,15 @@ func _on_open_dialog_file_selected(path:String) -> void:
 
 func _on_save_dialog_file_selected(path:String) -> void:
 	FileHandler.instance.save_level(path, EditorBeat.instance.objects)
+	if queue_test: _change_to_game_scene()
 	_on_dialog_cancelled()
 
 
 func _on_dialog_cancelled() -> void:
 	Statics.editor_accepts_inputs = true
+	queue_test = false
+
+
+func _change_to_game_scene() -> void:
+	Statics.level_load_path = FileHandler.instance.last_loaded_path
+	get_tree().change_scene_to_file("uid://oe0hoi334va7")

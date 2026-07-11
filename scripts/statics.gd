@@ -3,6 +3,7 @@ extends Node
 
 
 static var editor_accepts_inputs:bool = true
+static var level_load_path:String = ""
 
 enum BeatObjs {
 	NORMAL,

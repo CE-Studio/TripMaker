@@ -5,6 +5,8 @@ extends Area2D
 #region Variables
 const START_X:float = 1164.0
 const END_X:float = 58.0
+const MISS_X:float = 24.0
+const DESPAWN_X:float = -48.0
 const VERT_BOUNDS:float = 100.0
 
 var game:GameBeat
@@ -16,9 +18,11 @@ var end_elapsed:float = 0.0
 var target_tick:int = 0
 var start_tick:int = 0
 var end_tick:int = 0
+var overshoot_x:float = 0
 var target_y:float = 0.0
 var y_area:float = 0.0
 var flag_hit:bool = false
+var flag_missed:bool = false
 var flag_intersecting:bool = false
 
 @export var target_pos:Vector2 = Vector2.ZERO
@@ -62,7 +66,7 @@ func tick(this_tick:int) -> void:
 	if not flag_hit:
 		position.x = lerp(START_X, END_X, progress)
 	else:
-		position.x = lerp(END_X, START_X, progress - 1.0)
+		position.x = lerp(END_X, START_X, progress - 1.0) - (overshoot_x * 2.0)
 	position.y = (position.x - END_X) * angle + target_y
 	var times_flipped:int = 0
 	while position.y < VERT_BOUNDS:
@@ -74,19 +78,20 @@ func tick(this_tick:int) -> void:
 	if times_flipped % 2 == 1:
 		position.y = -(position.y - viewport_height)
 	
-	if this_tick >= target_tick and flag_intersecting:
-		print("Hit on tick " + str(this_tick))
+	if this_tick >= target_tick and flag_intersecting and not flag_hit:
+		#print("Hit on tick " + str(this_tick))
 		flag_hit = true
 		monitoring = false
 		angle *= -1.0
+		overshoot_x = absf(END_X - position.x)
 		hit.emit(game.main.BASE_PTS, true)
 	
-	if position.x <= 0.0 and not flag_hit:
-		print("Missed")
+	if position.x <= MISS_X and not flag_hit and not flag_missed:
+		#print("Missed")
 		missed.emit()
-		game.remove_obj(self)
-	elif (position.x <= 0.0 or position.x > START_X) and flag_hit:
-		print("Despawned")
+		flag_missed = true
+	if position.x <= DESPAWN_X or (position.x > START_X and flag_hit):
+		#print("Despawned")
 		despawn.emit()
 		game.remove_obj(self)
 

@@ -42,6 +42,7 @@ var highlighted_position:Vector2 = Vector2.ZERO
 var mouse_in_bounds:bool = false
 
 var objects:Array[EditorObject] = []
+var last_selected_object:EditorObject = null
 var last_found_i:int = -1
 
 @export var file_handler:FileHandler
@@ -104,6 +105,7 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 	if not Statics.editor_accepts_inputs or not mouse_in_bounds:
 		return
 	if type != Statics.BeatObjs.NONE and not check_position_occupied(pos):
+		deselect_obj()
 		var new_obj:BeatEditorObject = beat_object.instantiate()
 		new_obj.editor = self
 		new_obj.type = type as Statics.BeatObjs
@@ -135,6 +137,18 @@ func remove_obj(pos:Vector2 = highlighted_position) -> void:
 		obj.queue_free()
 		edit_made.emit()
 		object_removed.emit()
+
+
+func select_obj(obj:EditorObject) -> void:
+	if last_selected_object and last_selected_object.selected:
+		deselect_obj(last_selected_object)
+	obj.selected = true
+	last_selected_object = obj
+
+
+func deselect_obj(obj:EditorObject = last_selected_object) -> void:
+	if obj:
+		obj.selected = false
 
 
 #func update_cam_max() -> void:

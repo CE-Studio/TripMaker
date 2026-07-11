@@ -52,4 +52,5 @@ func _on_click_body_mouse_exited() -> void:
 func _on_click_body_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
 	if not Statics.editor_accepts_inputs:
 		return
-	pass # Replace with function body.
+	if not selected and _event.is_action_pressed("ui_mouse_left"):
+		editor.select_obj(self)

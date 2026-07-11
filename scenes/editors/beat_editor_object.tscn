@@ -2,14 +2,23 @@
 
 [ext_resource type="Script" uid="uid://dtx3wve3wn70p" path="res://scripts/editors/objects/beat_editor_object.gd" id="1_tcdj4"]
 [ext_resource type="Texture2D" uid="uid://bw0wsfy3txmdk" path="res://assets/images/Square.png" id="1_w6y1o"]
+[ext_resource type="Texture2D" uid="uid://8fyxjnwbi2vq" path="res://assets/images/Outline.png" id="2_n1tuy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcdj4"]
 size = Vector2(32, 32)
 
-[node name="BeatEditorObject" type="Node2D" unique_id=1581113728 node_paths=PackedStringArray("sprite")]
+[node name="BeatEditorObject" type="Node2D" unique_id=1581113728 node_paths=PackedStringArray("sprite", "click_area", "select_highlight")]
 z_index = 10
 script = ExtResource("1_tcdj4")
 sprite = NodePath("Sprite2D")
+click_area = NodePath("ClickBody")
+select_highlight = NodePath("SelectHighlight")
+
+[node name="SelectHighlight" type="Sprite2D" parent="." unique_id=1187924725]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_n1tuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1927319610]
 z_index = 1

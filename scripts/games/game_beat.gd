@@ -23,6 +23,7 @@ var objs:Array[BeatObject] = []
 
 func instance(_main:GameMain) -> void:
 	main = _main
+	ticks = main.SPAWN_BEATS * main.TICKS_PER_BEAT * -1
 	assert(paddle, "BEAT requires a paddle to be hooked up to work!")
 	assert(beat_group, "BEAT requires an object parent to be hooked up to work!")
 	for _obj in beat_group.get_children():
@@ -32,8 +33,7 @@ func instance(_main:GameMain) -> void:
 
 func tick(_delta:float, tick_count:int) -> void:
 	for i in range(tick_count):
-		if main.elapsed >= 0.0:
-			ticks += 1
+		ticks += 1
 		for _obj in objs:
 			_obj.tick(ticks)
 	
@@ -63,15 +63,27 @@ func _update_debug_label() -> void:
 	stats.append("BPM: " + str(main.bpm))
 	stats.append("Beat: " + str(main.current_beat))
 	stats.append("Ticks: " + str(ticks))
-	stats.append("Active objects: 0 (0/0/0)")
+	stats.append("Active objects: " + str(main.obj_count))
 	debug.text = "\n".join(stats)
 
 
+func add_obj(attributes:Array) -> void:
+	var new_obj:BeatObject = obj.instantiate()
+	new_obj.target_pos = Vector2(float(attributes[0]), float(attributes[3]))
+	new_obj.type = attributes[1]
+	new_obj.speed = attributes[4]
+	new_obj.angle = attributes[5]
+	append_obj(new_obj)
+	new_obj.tick(ticks)
+
+
 func append_obj(_obj:BeatObject) -> void:
+	beat_group.add_child(_obj)
 	main.obj_count += 1
 	_obj.game = self
 	objs.append(_obj)
 	_obj.hit.connect(main.on_beat_hit)
+	_obj.despawn.connect(main.on_beat_missed)
 
 
 func remove_obj(_obj:BeatObject) -> void:

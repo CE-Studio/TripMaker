@@ -21,6 +21,10 @@ config/icon="res://icon.svg"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
+[game]
+
+load_level_path=""
+
 [input]
 
 ui_pan={

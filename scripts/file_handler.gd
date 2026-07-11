@@ -89,7 +89,10 @@ func _beat_to_string(note:EditorObject) -> String:
 	var out_vals:PackedStringArray = []
 	out_vals.append("0:" + str(note.beat))
 	out_vals.append("1:" + str(note.type))
+	# 2 - x
 	out_vals.append("3:" + str(note.y))
+	out_vals.append("4:" + str(note.speed))
+	out_vals.append("5:" + str(note.angle))
 	return ";".join(out_vals)
 
 
@@ -101,21 +104,21 @@ func _string_to_beat(string:String, type:int = 0) -> EditorObject:
 	for element in elements:
 		var parts:PackedStringArray = element.split(":")
 		var attribute_id:int = int(parts[0])
-		var attribute_val:float = float(parts[1])
+		var attribute_val:Variant = parts[1]
 		match attribute_id:
 			#region General
 			0: # Object's home beat
-				obj.beat = attribute_val
+				obj.beat = float(attribute_val)
 			1: # Object's type
-				obj.type = roundi(attribute_val)
+				obj.type = int(attribute_val)
 			2: # Object's X offset
-				obj.x = attribute_val
+				obj.x = float(attribute_val)
 			3: # Object's Y offset
-				obj.y = attribute_val
-			4: # Object's angle
-				obj.angle = attribute_val
-			5: # Object's speed
-				obj.speed = attribute_val
+				obj.y = float(attribute_val)
+			4: # Object's speed
+				obj.speed = float(attribute_val)
+			5: # Object's angle
+				obj.angle = float(attribute_val)
 			#endregion
 			#region Beat
 			#endregion
