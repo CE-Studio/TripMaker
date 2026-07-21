@@ -7,11 +7,8 @@ const SCALE_MOD_NOMOUSE:float = 0.75
 const SCALE_MOD_MOUSE:float = 1.0
 const SCALE_MOD_LERP_RATE:float = 24.0
 
-var mouse_over:bool = false
 var current_scale:Vector2 = Vector2(0.75, 0.75)
 var current_scale_mod:float = SCALE_MOD_NOMOUSE
-
-var editor:EditorBeat
 #endregion
 
 
@@ -21,6 +18,14 @@ func _ready() -> void:
 	
 	sprite.scale = current_scale
 	sprite.modulate = Statics.BEAT_DATA_DICT[type][1]
+	super()
+
+
+func _spawn_widgets() -> void:
+	var w_speed = _create_single_widget("uid://hoaysujvnl43")
+	w_speed.instance(self, Vector2.RIGHT)
+	var w_angle = _create_single_widget("uid://6mhl26a5jlre")
+	w_angle.instance(self, Vector2.UP)
 
 
 func _process(delta: float) -> void:
@@ -39,18 +44,3 @@ func _process(delta: float) -> void:
 	
 	if editor:
 		position = Vector2(beat, y) * editor.grid_scale + editor.origin
-
-
-func _on_click_body_mouse_entered() -> void:
-	mouse_over = true
-
-
-func _on_click_body_mouse_exited() -> void:
-	mouse_over = false
-
-
-func _on_click_body_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
-	if not Statics.editor_accepts_inputs:
-		return
-	if not selected and _event.is_action_pressed("ui_mouse_left"):
-		editor.select_obj(self)

@@ -133,6 +133,8 @@ func remove_obj(pos:Vector2 = highlighted_position) -> void:
 		return
 	var obj:BeatEditorObject = check_position_occupied(pos)
 	if obj:
+		if obj.selected:
+			deselect_obj(obj)
 		objects.remove_at(last_found_i)
 		obj.queue_free()
 		edit_made.emit()
@@ -143,12 +145,14 @@ func select_obj(obj:EditorObject) -> void:
 	if last_selected_object and last_selected_object.selected:
 		deselect_obj(last_selected_object)
 	obj.selected = true
+	obj.update_widget_modes(1)
 	last_selected_object = obj
 
 
 func deselect_obj(obj:EditorObject = last_selected_object) -> void:
 	if obj:
 		obj.selected = false
+		obj.update_widget_modes(0)
 
 
 #func update_cam_max() -> void:
