@@ -55,6 +55,8 @@ func spawn() -> void:
 	
 	var y_prog:float = inverse_lerp(0.0, 16.0, target_pos.y)
 	target_y = lerp(VERT_BOUNDS, viewport_height - VERT_BOUNDS, y_prog)
+	
+	angle = Vector2.RIGHT.rotated(deg_to_rad(angle)).y
 
 
 func _process(delta:float) -> void:

@@ -59,6 +59,7 @@ var last_found_i:int = -1
 signal edit_made
 signal object_placed
 signal object_removed
+signal zoom_changed
 #endregion
 
 
@@ -214,3 +215,4 @@ func update_zoom(zoom_in:bool) -> void:
 		camera.position.x /= H_SCALE_BASE + H_SCALE_ADD * (h_zoom + 1)
 		camera.position.x *= H_SCALE_BASE + H_SCALE_ADD * h_zoom
 	camera.position.x = clampf(camera.position.x, 0.0, cam_max_x)
+	zoom_changed.emit()

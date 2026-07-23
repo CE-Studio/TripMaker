@@ -46,3 +46,12 @@ func _on_text_changed() -> void:
 		value = clampf(value, 0.01, INF)
 		slider.value = value
 		obj.speed = value
+
+
+func _input(event: InputEvent) -> void:
+	if mode != 2:
+		return
+	if event.is_action_pressed("ui_fine_control"):
+		slider.step = 0.01
+	elif event.is_action_released("ui_fine_control"):
+		slider.step = 0.25
