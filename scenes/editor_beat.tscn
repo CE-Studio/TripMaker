@@ -21,14 +21,14 @@ script = ExtResource("3_so6g8")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1483603225]
 
-[node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=986144587]
-
-[node name="EditorMain" parent="UICanvasLayer" unique_id=2036191018 node_paths=PackedStringArray("main_scene") instance=ExtResource("2_f2j0l")]
-main_scene = NodePath("../..")
-
 [node name="BeatEditorTimeline" parent="." unique_id=182580332 node_paths=PackedStringArray("editor") instance=ExtResource("4_tfiqv")]
 editor = NodePath("..")
 
 [node name="Highlight" parent="." unique_id=2095374136 instance=ExtResource("4_v1drp")]
 
 [node name="BeatGroup" type="Node2D" parent="." unique_id=1853149840]
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=986144587]
+
+[node name="EditorMain" parent="UICanvasLayer" unique_id=2036191018 node_paths=PackedStringArray("main_scene") instance=ExtResource("2_f2j0l")]
+main_scene = NodePath("../..")

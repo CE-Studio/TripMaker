@@ -3,12 +3,15 @@
 [ext_resource type="Script" uid="uid://d18x8alqokrxl" path="res://scripts/editors/widgets/widget_angle.gd" id="1_f1h5a"]
 [ext_resource type="Texture2D" uid="uid://bw0yv4ci52ot6" path="res://assets/images/editor/widgets/WidgetAngle.png" id="2_rvdys"]
 [ext_resource type="Texture2D" uid="uid://brcg24md1elwh" path="res://assets/images/editor/widgets/GenericCycle.png" id="3_rvdys"]
+[ext_resource type="Texture2D" uid="uid://cf1ry7k5s3g5x" path="res://assets/images/Handle.png" id="3_ty7q4"]
 
-[node name="WidgetAngle" type="Node2D" unique_id=2091417106 node_paths=PackedStringArray("text", "cycle", "button", "component")]
+[node name="WidgetAngle" type="Node2D" unique_id=2091417106 node_paths=PackedStringArray("handle", "text", "cycle", "button", "component")]
 z_index = 10
 script = ExtResource("1_f1h5a")
+handle = NodePath("Component/Handle")
 text = NodePath("Component/TextEdit")
 cycle = NodePath("Component/CycleButton")
+type_key = "angle"
 button = NodePath("TextureButton")
 component = NodePath("Component")
 
@@ -38,6 +41,17 @@ stretch_mode = 3
 [node name="Component" type="Node2D" parent="." unique_id=744397434]
 position = Vector2(-16, 16)
 
+[node name="Handle" type="TextureButton" parent="Component" unique_id=1907098762]
+offset_left = 92.0
+offset_top = -24.0
+offset_right = 108.0
+offset_bottom = -8.0
+texture_normal = ExtResource("3_ty7q4")
+texture_pressed = ExtResource("3_ty7q4")
+texture_hover = ExtResource("3_ty7q4")
+texture_disabled = ExtResource("3_ty7q4")
+texture_focused = ExtResource("3_ty7q4")
+
 [node name="TextEdit" type="TextEdit" parent="Component" unique_id=97604173]
 offset_top = 34.0
 offset_right = 67.0
@@ -55,5 +69,6 @@ texture_disabled = ExtResource("3_rvdys")
 texture_focused = ExtResource("3_rvdys")
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_button_pressed"]
+[connection signal="button_down" from="Component/Handle" to="." method="_on_handle_grabbed"]
 [connection signal="text_changed" from="Component/TextEdit" to="." method="_on_text_changed"]
 [connection signal="pressed" from="Component/CycleButton" to="." method="_on_cycle_pressed"]

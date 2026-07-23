@@ -16,6 +16,7 @@ var selected:bool = false
 var mouse_over:bool = false
 var editor:EditorBeat
 var widgets:Array[Widget] = []
+var widget_active:String = ""
 
 @export var timeline:EditorTimeline
 @export var sprite:Sprite2D
@@ -65,8 +66,19 @@ func _on_click_body_input_event(_viewport: Node, _event: InputEvent, _shape_idx:
 
 
 func update_widget_modes(_mode:int, _selected:Widget = null) -> void:
+	widget_active = ""
 	for widget in widgets:
-		if (_mode == 0 or _mode == 2) and widget == _selected:
+		if _mode == 0 and widget == _selected:
 			widget.set_mode(2)
+			widget_active = widget.type_key
 		else:
 			widget.set_mode(clampi(_mode, 0, 2))
+
+
+func enable_widget_of_type(_type:String) -> void:
+	var widget:Widget = null
+	for _widget in widgets:
+		if _widget.type_key == _type:
+			widget = _widget
+	if widget != null:
+		update_widget_modes(0, widget)

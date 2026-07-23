@@ -137,3 +137,11 @@ func _on_dialog_cancelled() -> void:
 func _change_to_game_scene() -> void:
 	Statics.level_load_path = FileHandler.instance.last_loaded_path
 	get_tree().change_scene_to_file("uid://oe0hoi334va7")
+
+
+func _on_zoom_in_pressed() -> void:
+	main_scene.increase_zoom()
+
+
+func _on_zoom_out_pressed() -> void:
+	main_scene.decrease_zoom()

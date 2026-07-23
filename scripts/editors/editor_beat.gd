@@ -9,6 +9,9 @@ const GRID_BORDER_WIDTH:int = 8
 const TEXT_COLOR:Color = Color(1.0, 1.0, 1.0, 0.75)
 const SECTION_NUM_SIZE:int = 64
 const BEAT_NUM_SIZE:int = 20
+const H_SCALE_BASE:int = 28
+const H_SCALE_ADD:int = 26
+const MAX_ZOOM:int = 3
 
 static var instance:EditorBeat
 
@@ -22,6 +25,7 @@ var visible_extents:float = 800.0
 var default_font:Font = ThemeDB.fallback_font
 var cam_min_x:float = 0.0
 var cam_max_x:float = 4000.0
+var h_zoom:int = 2
 
 var cam_x:float:
 	get():
@@ -105,6 +109,9 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 	if not Statics.editor_accepts_inputs or not mouse_in_bounds:
 		return
 	if type != Statics.BeatObjs.NONE and not check_position_occupied(pos):
+		var last_widget:String = ""
+		if last_selected_object and last_selected_object.selected:
+			last_widget = last_selected_object.widget_active
 		deselect_obj()
 		var new_obj:BeatEditorObject = beat_object.instantiate()
 		new_obj.editor = self
@@ -117,6 +124,9 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 		#print("Placed new object of type %s at %s" % [type, pos])
 		edit_made.emit()
 		object_placed.emit()
+		if last_widget != "":
+			select_obj(new_obj)
+			new_obj.enable_widget_of_type(last_widget)
 
 
 func place_loaded_obj(obj:EditorObject) -> void:
@@ -142,10 +152,15 @@ func remove_obj(pos:Vector2 = highlighted_position) -> void:
 
 
 func select_obj(obj:EditorObject) -> void:
+	var last_widget:String = ""
 	if last_selected_object and last_selected_object.selected:
+		last_widget = last_selected_object.widget_active
 		deselect_obj(last_selected_object)
 	obj.selected = true
-	obj.update_widget_modes(1)
+	if last_widget != "":
+		obj.enable_widget_of_type(last_widget)
+	else:
+		obj.update_widget_modes(1)
 	last_selected_object = obj
 
 
@@ -178,3 +193,24 @@ func reset_all() -> void:
 	file_handler.last_loaded_path = ""
 	file_handler.last_loaded_name = ""
 	ui.set_saved_label_text("")
+
+
+func increase_zoom() -> void:
+	if h_zoom < MAX_ZOOM:
+		h_zoom += 1
+		update_zoom(true)
+
+func decrease_zoom() -> void:
+	if h_zoom > 0:
+		h_zoom -= 1
+		update_zoom(false)
+
+func update_zoom(zoom_in:bool) -> void:
+	grid_scale.x = H_SCALE_BASE + (H_SCALE_ADD * h_zoom)
+	if zoom_in:
+		camera.position.x /= H_SCALE_BASE + H_SCALE_ADD * (h_zoom - 1)
+		camera.position.x *= H_SCALE_BASE + H_SCALE_ADD * h_zoom
+	else:
+		camera.position.x /= H_SCALE_BASE + H_SCALE_ADD * (h_zoom + 1)
+		camera.position.x *= H_SCALE_BASE + H_SCALE_ADD * h_zoom
+	camera.position.x = clampf(camera.position.x, 0.0, cam_max_x)

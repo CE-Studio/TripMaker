@@ -8,6 +8,7 @@ z_index = 10
 script = ExtResource("1_ki88n")
 slider = NodePath("Component/HSlider")
 text = NodePath("Component/TextEdit")
+type_key = "speed"
 button = NodePath("TextureButton")
 component = NodePath("Component")
 

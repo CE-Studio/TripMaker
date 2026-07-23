@@ -28,7 +28,10 @@ const HANDLE_RADIUS:float = 128.0
 static var show_clean:bool = false
 var current_angles:Array[float] = []
 var elapsed:float = 0.0
+var handle_grabbed:bool = false
+var text_edited_this_frame:bool = false
 
+@export var handle:TextureButton
 @export var text:TextEdit
 @export var cycle:TextureButton
 #endregion
@@ -43,6 +46,8 @@ func _ready() -> void:
 func _type_process(delta:float) -> void:
 	position = position.lerp(Vector2(-32, -32), LERP_RATE * delta)
 	elapsed += delta
+	if handle_grabbed:
+		handle.global_position = get_global_mouse_position()
 
 
 func set_mode(_mode:int) -> void:
@@ -66,7 +71,8 @@ func _draw() -> void:
 			var angle_vector:Vector2 = (rot_vector * grid_scale).normalized()
 			draw_line(origin + angle_vector * 24, origin + angle_vector * 192, col, 2)
 		col.a = 1.0
-		draw_arc(origin, HANDLE_RADIUS, deg_to_rad(-60), deg_to_rad(60), 16, col, 3)
+		var angle:float = 80.0 - (10.0 * obj.editor.h_zoom)
+		draw_arc(origin, HANDLE_RADIUS, deg_to_rad(-angle), deg_to_rad(angle), 16, col, 3)
 
 
 func setup_working_array() -> void:
@@ -81,3 +87,12 @@ func setup_working_array() -> void:
 func _on_cycle_pressed() -> void:
 	show_clean = not show_clean
 	setup_working_array()
+
+
+func _on_handle_grabbed() -> void:
+	handle_grabbed = true
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("ui_mouse_left"):
+		if handle_grabbed: handle_grabbed = false

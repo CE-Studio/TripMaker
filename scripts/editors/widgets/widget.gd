@@ -6,6 +6,7 @@ extends Node2D
 const LERP_RATE:float = 10.0
 const SELECT_EXTENSION:float = 64.0
 
+@export var type_key:String = ""
 var obj:EditorObject
 var rest_dir:Vector2 = Vector2.RIGHT
 var mode:int = -1
