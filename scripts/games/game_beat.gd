@@ -83,7 +83,7 @@ func append_obj(_obj:BeatObject) -> void:
 	_obj.game = self
 	objs.append(_obj)
 	_obj.hit.connect(main.on_beat_hit)
-	_obj.despawn.connect(main.on_beat_missed)
+	_obj.missed.connect(main.on_beat_missed)
 
 
 func remove_obj(_obj:BeatObject) -> void:
