@@ -39,14 +39,14 @@ var text_edited_this_frame:bool = false
 
 func _ready() -> void:
 	super()
-	color = Color("ffaa2b")
+	color = Statics.COLORS_TRANSITION[9]
 	setup_working_array()
 
 
-func _type_process(delta:float) -> void:
+func _type_process(_delta:float) -> void:
 	text_edited_this_frame = false
-	position = position.lerp(Vector2(-32, -32), LERP_RATE * delta)
-	elapsed += delta
+	position = position.lerp(Vector2(-32, -32), LERP_RATE * _delta)
+	elapsed += _delta
 	if handle_grabbed:
 		text_edited_this_frame = true
 		var mouse_pos:Vector2 = get_global_mouse_position() - obj.global_position
@@ -91,6 +91,16 @@ func set_mode(_mode:int) -> void:
 		handle.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		cycle.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func return_target_value() -> Variant:
+	return obj.angle
+
+
+func set_target_value(_value:Variant) -> void:
+	text_edited_this_frame = true
+	obj.angle = _value
+	text.text = str(obj.angle)
 
 
 func _draw() -> void:

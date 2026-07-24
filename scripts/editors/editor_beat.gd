@@ -111,8 +111,10 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 		return
 	if type != Statics.BeatObjs.NONE and not check_position_occupied(pos):
 		var last_widget:String = ""
+		var last_obj:EditorObject = null
 		if last_selected_object and last_selected_object.selected:
 			last_widget = last_selected_object.widget_active
+			last_obj = last_selected_object
 		deselect_obj()
 		var new_obj:BeatEditorObject = beat_object.instantiate()
 		new_obj.editor = self
@@ -125,6 +127,9 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 		#print("Placed new object of type %s at %s" % [type, pos])
 		edit_made.emit()
 		object_placed.emit()
+		if last_obj and last_obj.type == new_obj.type:
+			for i in last_obj.widgets.size():
+				new_obj.widgets[i].set_target_value(last_obj.widgets[i].return_target_value())
 		if last_widget != "":
 			select_obj(new_obj)
 			new_obj.enable_widget_of_type(last_widget)

@@ -52,7 +52,7 @@ func _process(delta:float) -> void:
 
 
 ## Unique process branch for different widget types to handle their own loops
-func _type_process(delta:float) -> void:
+func _type_process(_delta:float) -> void:
 	pass
 
 
@@ -65,6 +65,16 @@ func set_mode(_mode:int) -> void:
 	else:
 		button.disabled = false
 		button.mouse_filter = Control.MOUSE_FILTER_STOP
+
+
+## Returns the value of whatever object attribute this widget is set to configure
+func return_target_value() -> Variant:
+	return null
+
+
+## Sets the value of the object attribute this widget is set to configure from an external call
+func set_target_value(_value:Variant) -> void:
+	pass
 
 
 ## Called when the widget's main button is pressed

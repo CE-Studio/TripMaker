@@ -10,9 +10,14 @@ var text_edited_this_frame:bool = false
 #endregion
 
 
-func _type_process(delta:float) -> void:
+func _ready() -> void:
+	super()
+	color = Statics.COLORS_TRANSITION[0]
+
+
+func _type_process(_delta:float) -> void:
 	text_edited_this_frame = false
-	position = position.lerp(Vector2(32, -32), LERP_RATE * delta)
+	position = position.lerp(Vector2(32, -32), LERP_RATE * _delta)
 
 
 func set_mode(_mode:int) -> void:
@@ -26,6 +31,16 @@ func set_mode(_mode:int) -> void:
 	else:
 		slider.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func return_target_value() -> Variant:
+	return obj.speed
+
+
+func set_target_value(_value:Variant) -> void:
+	text_edited_this_frame = true
+	obj.speed = _value
+	text.text = str(obj.speed)
 
 
 ## Called when the slider has its value adjusted

@@ -11,6 +11,44 @@ enum Attributes {
 }
 
 
+const COLORS_TRANSITION:Array[Color] = [
+	Color("fbf74b"),  #  0
+	Color("2e9ca8"),  #  1
+	Color("#00d200"), #  2
+	Color("c44193"),  #  3
+	Color("e578a6"),  #  4
+	Color("00e5fc"),  #  5
+	Color("009e91"),  #  6
+	Color("7e82ff"),  #  7
+	Color("0e0bed"),  #  8
+	Color("fcce00"),  #  9
+	Color("fff100"),  # 10
+	Color("bef8fd"),  # 11
+	Color("ffa400"),  # 12
+	Color("ff1c00"),  # 13
+]
+
+const COLORS_MEGA:Array[Color] = [
+	Color("ffa400"), # 0
+	Color("fbf74b"), # 1
+	Color("2e9ca8"), # 2
+	Color("c44193"), # 3
+	Color("e578a6"), # 4
+	Color("009e91"), # 5
+	Color("7e82ff"), # 6
+	Color("fcce00"), # 7
+	Color("bef8fd"), # 8
+]
+
+const COLORS_EXTRA:Array[Color] = [
+	Color("ffd600"), # 0
+	Color("ffaa2b"), # 1
+	Color("2b9aa5"), # 2
+	Color("e27ca6"), # 3
+	Color("32377d"), # 4
+]
+
+
 enum BeatObjs {
 	NORMAL,
 	OVERLAP,
