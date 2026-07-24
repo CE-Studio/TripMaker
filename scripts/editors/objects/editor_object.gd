@@ -10,6 +10,7 @@ var x:float = 0.0
 var y:float = 0.0
 var angle:float = 0.0
 var speed:float = 4.0
+var type_vars:Array = []
 
 var elapsed:float = 0.0
 var selected:bool = false

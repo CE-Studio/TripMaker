@@ -84,7 +84,7 @@ func level_exists_in_main_folder(lvl_name:String) -> bool:
 	return level_exists_at_path(lvl_name.join([LEVEL_PATH, LEVEL_EXT]))
 
 
-func _beat_to_string(note:EditorObject) -> String:
+func _beat_to_string(note:EditorObject) -> String: # Move this to the editor object itself and make overridable
 	var out_vals:PackedStringArray = []
 	out_vals.append(_attribute_to_string(Statics.Attributes.BEAT, note.beat))
 	out_vals.append(_attribute_to_string(Statics.Attributes.TYPE, note.type))
