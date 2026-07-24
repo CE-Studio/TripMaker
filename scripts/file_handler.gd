@@ -73,7 +73,6 @@ func _set_last_saved(lvl_path:String, lvl_name:String = "") -> void:
 		var path_parts:PackedStringArray = lvl_path.split("/")
 		lvl_name = path_parts[path_parts.size() - 1]
 		last_loaded_name = lvl_name.replace(LEVEL_EXT, "")
-		print(last_loaded_name)
 	EditorUI.instance.set_saved_label_text(lvl_name + LEVEL_EXT)
 
 
@@ -87,13 +86,17 @@ func level_exists_in_main_folder(lvl_name:String) -> bool:
 
 func _beat_to_string(note:EditorObject) -> String:
 	var out_vals:PackedStringArray = []
-	out_vals.append("0:" + str(note.beat))
-	out_vals.append("1:" + str(note.type))
+	out_vals.append(_attribute_to_string(Statics.Attributes.BEAT, note.beat))
+	out_vals.append(_attribute_to_string(Statics.Attributes.TYPE, note.type))
 	# 2 - x
-	out_vals.append("3:" + str(note.y))
-	out_vals.append("4:" + str(note.speed))
-	out_vals.append("5:" + str(note.angle))
+	out_vals.append(_attribute_to_string(Statics.Attributes.Y, note.y))
+	out_vals.append(_attribute_to_string(Statics.Attributes.SPEED, note.speed))
+	out_vals.append(_attribute_to_string(Statics.Attributes.ANGLE, note.angle))
 	return ";".join(out_vals)
+
+func _attribute_to_string(attribute:Statics.Attributes, value:Variant) -> String:
+	var i:int = attribute as int
+	return ":".join([str(i), str(value)])
 
 
 func _string_to_beat(string:String, type:int = 0) -> EditorObject:
@@ -107,17 +110,17 @@ func _string_to_beat(string:String, type:int = 0) -> EditorObject:
 		var attribute_val:Variant = parts[1]
 		match attribute_id:
 			#region General
-			0: # Object's home beat
+			Statics.Attributes.BEAT: # Object's home beat
 				obj.beat = float(attribute_val)
-			1: # Object's type
+			Statics.Attributes.TYPE: # Object's type
 				obj.type = int(attribute_val)
-			2: # Object's X offset
+			Statics.Attributes.X: # Object's X offset
 				obj.x = float(attribute_val)
-			3: # Object's Y offset
+			Statics.Attributes.Y: # Object's Y offset
 				obj.y = float(attribute_val)
-			4: # Object's speed
+			Statics.Attributes.SPEED: # Object's speed
 				obj.speed = float(attribute_val)
-			5: # Object's angle
+			Statics.Attributes.ANGLE: # Object's angle
 				obj.angle = float(attribute_val)
 			#endregion
 			#region Beat

@@ -5,6 +5,12 @@ extends Node
 static var editor_accepts_inputs:bool = true
 static var level_load_path:String = ""
 
+
+enum Attributes {
+	BEAT = 0, TYPE = 1, X = 2, Y = 3, SPEED = 4, ANGLE = 5
+}
+
+
 enum BeatObjs {
 	NORMAL,
 	OVERLAP,
