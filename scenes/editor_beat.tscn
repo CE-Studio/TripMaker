@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cotmjwuj2xb2i" path="res://scripts/file_handler.gd" id="3_so6g8"]
 [ext_resource type="PackedScene" uid="uid://c3658jgdn5hdi" path="res://scenes/editors/beat_editor_timeline.tscn" id="4_tfiqv"]
 [ext_resource type="PackedScene" uid="uid://d2dq2m1c8ecnj" path="res://scenes/highlight.tscn" id="4_v1drp"]
-[ext_resource type="PackedScene" uid="uid://dunmp80gyd3bt" path="res://scenes/editors/beat_editor_object.tscn" id="5_f2j0l"]
+[ext_resource type="PackedScene" uid="uid://bv2uuad1djktt" path="res://scenes/editors/beat_editor_object.tscn" id="5_f2j0l"]
 
 [node name="EditorRoot" type="Node2D" unique_id=1580143505 node_paths=PackedStringArray("file_handler", "highlight", "camera", "ui", "beat_group")]
 script = ExtResource("1_v1drp")

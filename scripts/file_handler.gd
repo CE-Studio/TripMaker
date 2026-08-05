@@ -84,45 +84,14 @@ func level_exists_in_main_folder(lvl_name:String) -> bool:
 	return level_exists_at_path(lvl_name.join([LEVEL_PATH, LEVEL_EXT]))
 
 
-func _beat_to_string(note:EditorObject) -> String: # Move this to the editor object itself and make overridable
-	var out_vals:PackedStringArray = []
-	out_vals.append(_attribute_to_string(Statics.Attributes.BEAT, note.beat))
-	out_vals.append(_attribute_to_string(Statics.Attributes.TYPE, note.type))
-	# 2 - x
-	out_vals.append(_attribute_to_string(Statics.Attributes.Y, note.y))
-	out_vals.append(_attribute_to_string(Statics.Attributes.SPEED, note.speed))
-	out_vals.append(_attribute_to_string(Statics.Attributes.ANGLE, note.angle))
-	return ";".join(out_vals)
-
-func _attribute_to_string(attribute:Statics.Attributes, value:Variant) -> String:
-	var i:int = attribute as int
-	return ":".join([str(i), str(value)])
+func _beat_to_string(note:EditorObject) -> String:
+	return note.save_to_string()
 
 
 func _string_to_beat(string:String, type:int = 0) -> EditorObject:
 	var obj:EditorObject
 	match type:
-		0: obj = load("res://scenes/editors/beat_editor_object.tscn").instantiate()
-	var elements:PackedStringArray = string.split(";")
-	for element in elements:
-		var parts:PackedStringArray = element.split(":")
-		var attribute_id:int = int(parts[0])
-		var attribute_val:Variant = parts[1]
-		match attribute_id:
-			#region General
-			Statics.Attributes.BEAT: # Object's home beat
-				obj.beat = float(attribute_val)
-			Statics.Attributes.TYPE: # Object's type
-				obj.type = int(attribute_val)
-			Statics.Attributes.X: # Object's X offset
-				obj.x = float(attribute_val)
-			Statics.Attributes.Y: # Object's Y offset
-				obj.y = float(attribute_val)
-			Statics.Attributes.SPEED: # Object's speed
-				obj.speed = float(attribute_val)
-			Statics.Attributes.ANGLE: # Object's angle
-				obj.angle = float(attribute_val)
-			#endregion
-			#region Beat
-			#endregion
+		0: obj = load("uid://dunmp80gyd3bt").instantiate()
+	var attributes:PackedStringArray = string.split(";")
+	obj.load_from_string(attributes)
 	return obj

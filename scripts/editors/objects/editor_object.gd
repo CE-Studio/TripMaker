@@ -18,6 +18,7 @@ var mouse_over:bool = false
 var editor:EditorBeat
 var widgets:Array[Widget] = []
 var widget_active:String = ""
+var type_ext:TypeExtension
 
 @export var timeline:EditorTimeline
 @export var sprite:Sprite2D
@@ -33,11 +34,16 @@ func _ready() -> void:
 func _spawn_widgets() -> void:
 	pass
 
-func _create_single_widget(uid:String) -> Widget:
+func _create_single_widget(uid:String, rest_dir:Vector2) -> Widget:
 	var widget:Widget = load(uid).instantiate()
 	add_child(widget)
 	widgets.append(widget)
+	widget.instance(self, rest_dir)
 	return widget
+
+
+func _add_type_extension(_type:int = type) -> void:
+	pass
 
 
 func _process(delta: float) -> void:
@@ -83,3 +89,43 @@ func enable_widget_of_type(_type:String) -> void:
 			widget = _widget
 	if widget != null:
 		update_widget_modes(0, widget)
+
+
+func save_to_string() -> String:
+	var out_vals:PackedStringArray = []
+	out_vals.append(_attribute_to_string(Statics.Attributes.BEAT, beat))
+	out_vals.append(_attribute_to_string(Statics.Attributes.TYPE, type))
+	# 2 - x
+	out_vals.append(_attribute_to_string(Statics.Attributes.Y, y))
+	out_vals.append(_attribute_to_string(Statics.Attributes.SPEED, speed))
+	out_vals.append(_attribute_to_string(Statics.Attributes.ANGLE, angle))
+	if type_ext:
+		out_vals.append_array(type_ext.save_to_string())
+	return ";".join(out_vals)
+
+func _attribute_to_string(attribute:Statics.Attributes, value:Variant) -> String:
+	var i:int = attribute as int
+	return ":".join([str(i), str(value)])
+
+
+func load_from_string(attrs:PackedStringArray) -> void:
+	for element in attrs:
+		var parts:PackedStringArray = element.split(":")
+		var attribute_id:int = int(parts[0])
+		var attribute_val:Variant = parts[1]
+		match attribute_id:
+			Statics.Attributes.BEAT: # Object's home beat
+				beat = float(attribute_val)
+			Statics.Attributes.TYPE: # Object's type
+				type = int(attribute_val)
+				_add_type_extension()
+			Statics.Attributes.X: # Object's X offset
+				x = float(attribute_val)
+			Statics.Attributes.Y: # Object's Y offset
+				y = float(attribute_val)
+			Statics.Attributes.SPEED: # Object's speed
+				speed = float(attribute_val)
+			Statics.Attributes.ANGLE: # Object's angle
+				angle = float(attribute_val)
+			_:
+				if type_ext: type_ext.load_attribute(attribute_id, attribute_val)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b8rb76dje3i1f"]
 
 [ext_resource type="Script" uid="uid://wf2o5umiug18" path="res://scripts/editors/build_panel.gd" id="1_4qabv"]
-[ext_resource type="PackedScene" uid="uid://dunmp80gyd3bt" path="res://scenes/editors/beat_editor_object.tscn" id="2_e7wxu"]
+[ext_resource type="PackedScene" uid="uid://dunmp80gyd3bt" path="res://scenes/editors/objects/beat_editor_object.tscn" id="2_e7wxu"]
 [ext_resource type="Texture2D" uid="uid://cfm0d7xsrsful" path="res://assets/images/editor/beat/IconBeatOverlap.png" id="2_v452s"]
 [ext_resource type="Texture2D" uid="uid://dpry84m76p3ka" path="res://assets/images/editor/beat/IconBeatAvoid.png" id="3_lbt2o"]
 [ext_resource type="Texture2D" uid="uid://cpycq0viej2m3" path="res://assets/images/editor/beat/IconBeatBonus.png" id="4_fslgv"]

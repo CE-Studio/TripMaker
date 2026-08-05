@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://vn780u06mc73"]
+
+[ext_resource type="Script" uid="uid://btxf1phsy2tjc" path="res://scripts/editors/widgets/widget_scaler.gd" id="1_hp7wq"]
+[ext_resource type="Texture2D" uid="uid://dydvwqwwkb8ae" path="res://assets/images/editor/widgets/WidgetScaling.png" id="2_hp7wq"]
+
+[node name="WidgetScaler" type="Node2D" unique_id=2091417106 node_paths=PackedStringArray("slider", "text", "button", "component")]
+z_index = 10
+script = ExtResource("1_hp7wq")
+slider = NodePath("Component/HSlider")
+text = NodePath("Component/TextEdit")
+type_key = "speed"
+button = NodePath("TextureButton")
+component = NodePath("Component")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=2043404908]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Speed
+How many beats it takes for this object to cross the screen.
+Higher beat count means a slower object."
+texture_normal = ExtResource("2_hp7wq")
+texture_pressed = ExtResource("2_hp7wq")
+texture_hover = ExtResource("2_hp7wq")
+texture_disabled = ExtResource("2_hp7wq")
+texture_focused = ExtResource("2_hp7wq")
+stretch_mode = 3
+
+[node name="Component" type="Node2D" parent="." unique_id=744397434]
+position = Vector2(-16, 48)
+
+[node name="HSlider" type="HSlider" parent="Component" unique_id=1341907696]
+offset_right = 121.0
+offset_bottom = 16.0
+min_value = 0.25
+max_value = 8.0
+step = 0.25
+value = 2.0
+allow_greater = true
+tick_count = 8
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="TextEdit" type="TextEdit" parent="Component" unique_id=97604173]
+offset_top = 18.0
+offset_right = 67.0
+offset_bottom = 54.0
+text = "2.0"
+placeholder_text = "2.0"
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="Component/HSlider" to="." method="_on_slider_changed"]
+[connection signal="text_changed" from="Component/TextEdit" to="." method="_on_text_changed"]

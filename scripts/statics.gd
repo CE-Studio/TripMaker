@@ -8,7 +8,7 @@ static var level_load_path:String = ""
 
 enum Attributes {
 	BEAT = 0, TYPE = 1, X = 2, Y = 3, SPEED = 4, ANGLE = 5,
-	SCALER_MIN = 50, SCALER_MAX = 51, SCALER_TIME = 52, SCALER_SLIM = 53
+	SCALER_MIN = 50, SCALER_MAX = 51, SCALER_TIME = 52, SCALER_SLIM = 53, SCALER_ABS = 54
 }
 
 

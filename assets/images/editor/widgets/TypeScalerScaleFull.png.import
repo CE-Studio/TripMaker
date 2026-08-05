@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4xfhpd5wnakh"
-path="res://.godot/imported/TypeScalerSlim.png-4d011f51b126d3d8bde37e1e435aebbd.ctex"
+uid="uid://hil35bcaftfv"
+path="res://.godot/imported/TypeScalerScaleFull.png-f50da9ad44c3ef3abed53ba300ac4d72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/editor/widgets/TypeScalerSlim.png"
-dest_files=["res://.godot/imported/TypeScalerSlim.png-4d011f51b126d3d8bde37e1e435aebbd.ctex"]
+source_file="res://assets/images/editor/widgets/TypeScalerScaleFull.png"
+dest_files=["res://.godot/imported/TypeScalerScaleFull.png-f50da9ad44c3ef3abed53ba300ac4d72.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bv2uuad1djktt"]
+[gd_scene format=3 uid="uid://dunmp80gyd3bt"]
 
 [ext_resource type="Script" uid="uid://dtx3wve3wn70p" path="res://scripts/editors/objects/beat_editor_object.gd" id="1_tcdj4"]
 [ext_resource type="Texture2D" uid="uid://bw0wsfy3txmdk" path="res://assets/images/Square.png" id="1_w6y1o"]

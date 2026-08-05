@@ -3,7 +3,7 @@ extends Node2D
 
 
 #region Variables
-const GRID_COLOR:Color = Color(1.0, 1.0, 1.0, 0.4)
+const GRID_COLOR:Color = Color(0.1, 0.1, 0.1, 0.7)
 const GRID_WIDTH:int = 4
 const GRID_BORDER_WIDTH:int = 8
 const TEXT_COLOR:Color = Color(1.0, 1.0, 1.0, 0.75)
@@ -106,7 +106,7 @@ func _input(event: InputEvent) -> void:
 			camera.position.x = clampf(camera.position.x, cam_min_x, cam_max_x)
 
 
-func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_element) -> void:
+func place_obj(pos:Vector2 = highlighted_position, type:int = BuildPanel.selected_element) -> void:
 	if not Statics.editor_accepts_inputs or not mouse_in_bounds:
 		return
 	if type != Statics.BeatObjs.NONE and not check_position_occupied(pos):
@@ -118,10 +118,11 @@ func place_obj(pos:Vector2 = highlighted_position, type = BuildPanel.selected_el
 		deselect_obj()
 		var new_obj:BeatEditorObject = beat_object.instantiate()
 		new_obj.editor = self
-		new_obj.type = type as Statics.BeatObjs
+		new_obj.type = type
 		new_obj.beat = pos.x
 		new_obj.y = pos.y
 		beat_group.add_child(new_obj)
+		new_obj._add_type_extension()
 		new_obj._process(0.0)
 		objects.append(new_obj)
 		#print("Placed new object of type %s at %s" % [type, pos])
