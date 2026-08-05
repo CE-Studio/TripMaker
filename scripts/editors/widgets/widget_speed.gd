@@ -24,13 +24,11 @@ func set_mode(_mode:int) -> void:
 	super(_mode)
 	if mode == 2:
 		text_edited_this_frame = true
-		slider.mouse_filter = Control.MOUSE_FILTER_STOP
-		slider.value = clampf(obj.speed, slider.min_value, slider.max_value)
-		text.mouse_filter = Control.MOUSE_FILTER_STOP
-		text.text = str(obj.speed)
+		_enable_control(slider, clampf(obj.speed, slider.min_value, slider.max_value))
+		_enable_control(text, str(obj.speed))
 	else:
-		slider.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_disable_control(slider)
+		_disable_control(text)
 
 
 func return_target_value() -> Variant:

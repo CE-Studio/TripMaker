@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dg53uli5ibouv" path="res://assets/images/game/huds/hud_beat.png" id="1_3vhut"]
 [ext_resource type="PackedScene" uid="uid://drui8swovfnoe" path="res://scenes/games/players/paddle.tscn" id="1_aicja"]
 [ext_resource type="Script" uid="uid://eib1c6015min" path="res://scripts/games/game_beat.gd" id="1_joj2x"]
+[ext_resource type="AudioStream" uid="uid://crjaoil43iqo3" path="res://assets/sounds/music/beat/Desention_Level2.ogg" id="4_rcsas"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aicja"]
 
@@ -87,3 +88,7 @@ Active objects: 0 (0/0)
 0 hits, 0 misses"
 fit_content = true
 horizontal_alignment = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=903560912]
+stream = ExtResource("4_rcsas")
+autoplay = true

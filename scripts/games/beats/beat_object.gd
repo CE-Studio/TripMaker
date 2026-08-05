@@ -8,8 +8,10 @@ const END_X:float = 58.0
 const MISS_X:float = 24.0
 const DESPAWN_X:float = -48.0
 const VERT_BOUNDS:float = 100.0
+const BASE_SCALE:Vector2 = Vector2(0.5, 0.5)
 
 var game:GameBeat
+var type_ext:TypeExtension
 var elapsed:float = 0.0
 var viewport_height:float = 0.0
 var beat_time:float = 0.5
@@ -61,6 +63,31 @@ func spawn() -> void:
 
 func _process(delta:float) -> void:
 	elapsed += delta
+
+
+func load_attributes(attrs:Array) -> void:
+	for i in range(attrs.size()):
+		if attrs[i] == null:
+			continue
+		var val:Variant = attrs[i]
+		match i as Statics.Attributes:
+			Statics.Attributes.BEAT: target_pos.x = float(val)
+			Statics.Attributes.TYPE:
+				type = int(val) as Statics.BeatObjs
+				_add_type_extension()
+			Statics.Attributes.Y: target_pos.y = float(val)
+			Statics.Attributes.SPEED: speed = float(val)
+			Statics.Attributes.ANGLE: angle = float(val)
+			_: if type_ext: type_ext.load_attribute(i, val)
+
+func _add_type_extension() -> void:
+	var ext:TypeExtension = null
+	match type as Statics.BeatObjs:
+		Statics.BeatObjs.SCALER: ext = ScalerExtension.new()
+	if ext:
+		add_child(ext)
+		type_ext = ext
+		ext.g_obj = self
 
 
 func tick(this_tick:int) -> void:

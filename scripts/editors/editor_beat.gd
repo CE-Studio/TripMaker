@@ -121,8 +121,8 @@ func place_obj(pos:Vector2 = highlighted_position, type:int = BuildPanel.selecte
 		new_obj.type = type
 		new_obj.beat = pos.x
 		new_obj.y = pos.y
-		beat_group.add_child(new_obj)
 		new_obj._add_type_extension()
+		beat_group.add_child(new_obj)
 		new_obj._process(0.0)
 		objects.append(new_obj)
 		#print("Placed new object of type %s at %s" % [type, pos])

@@ -34,9 +34,10 @@ func _add_type_extension(_type:int = type) -> void:
 	match _type as Statics.BeatObjs:
 		Statics.BeatObjs.SCALER: ext = ScalerExtension.new()
 	if ext:
+		ext.edit_mode = true
 		add_child(ext)
 		type_ext = ext
-		ext.obj = self
+		ext.e_obj = self
 
 
 func _process(delta: float) -> void:

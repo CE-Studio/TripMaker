@@ -2,13 +2,23 @@
 
 [ext_resource type="Script" uid="uid://btxf1phsy2tjc" path="res://scripts/editors/widgets/widget_scaler.gd" id="1_hp7wq"]
 [ext_resource type="Texture2D" uid="uid://dydvwqwwkb8ae" path="res://assets/images/editor/widgets/WidgetScaling.png" id="2_hp7wq"]
+[ext_resource type="Texture2D" uid="uid://hil35bcaftfv" path="res://assets/images/editor/widgets/TypeScalerScaleFull.png" id="3_iv8y0"]
+[ext_resource type="Texture2D" uid="uid://cmusvbetxnd3d" path="res://assets/images/editor/widgets/TypeScalerScaleSlim.png" id="4_48njn"]
+[ext_resource type="Texture2D" uid="uid://bh6ktndsvrttd" path="res://assets/images/editor/widgets/TypeScalerCycleSine.png" id="5_cy23x"]
+[ext_resource type="Texture2D" uid="uid://bcog3nq0a3yui" path="res://assets/images/editor/widgets/TypeScalerCycleAbs.png" id="6_3wlky"]
 
-[node name="WidgetScaler" type="Node2D" unique_id=2091417106 node_paths=PackedStringArray("slider", "text", "button", "component")]
+[node name="WidgetScaler" type="Node2D" unique_id=2091417106 node_paths=PackedStringArray("slider_min", "text_min", "slider_max", "text_max", "slider_time", "text_time", "button_slim", "button_abs", "button", "component")]
 z_index = 10
 script = ExtResource("1_hp7wq")
-slider = NodePath("Component/HSlider")
-text = NodePath("Component/TextEdit")
-type_key = "speed"
+slider_min = NodePath("Component/Min/HSlider")
+text_min = NodePath("Component/Min/TextEdit")
+slider_max = NodePath("Component/Max/HSlider")
+text_max = NodePath("Component/Max/TextEdit")
+slider_time = NodePath("Component/Time/HSlider")
+text_time = NodePath("Component/Time/TextEdit")
+button_slim = NodePath("Component/SlimButton")
+button_abs = NodePath("Component/AbsButton")
+type_key = "scaler"
 button = NodePath("TextureButton")
 component = NodePath("Component")
 
@@ -35,13 +45,77 @@ texture_focused = ExtResource("2_hp7wq")
 stretch_mode = 3
 
 [node name="Component" type="Node2D" parent="." unique_id=744397434]
-position = Vector2(-16, 48)
+position = Vector2(-16, 16)
 
-[node name="HSlider" type="HSlider" parent="Component" unique_id=1341907696]
+[node name="SlimButton" type="TextureButton" parent="Component" unique_id=1378870723]
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 64.0
+toggle_mode = true
+texture_normal = ExtResource("3_iv8y0")
+texture_pressed = ExtResource("4_48njn")
+
+[node name="AbsButton" type="TextureButton" parent="Component" unique_id=96558565]
+offset_top = 64.0
+offset_right = 32.0
+offset_bottom = 96.0
+toggle_mode = true
+texture_normal = ExtResource("5_cy23x")
+texture_pressed = ExtResource("6_3wlky")
+
+[node name="Min" type="Node2D" parent="Component" unique_id=1214574572]
+position = Vector2(64, 96)
+
+[node name="HSlider" type="HSlider" parent="Component/Min" unique_id=1341907696]
+offset_right = 121.0
+offset_bottom = 16.0
+min_value = -2.0
+max_value = 4.0
+step = 0.25
+value = 0.5
+allow_greater = true
+tick_count = 8
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="TextEdit" type="TextEdit" parent="Component/Min" unique_id=97604173]
+offset_top = 32.0
+offset_right = 67.0
+offset_bottom = 68.0
+text = "0.5"
+placeholder_text = "0.5"
+
+[node name="Max" type="Node2D" parent="Component" unique_id=948014034]
+position = Vector2(64, 112)
+
+[node name="HSlider" type="HSlider" parent="Component/Max" unique_id=1657894437]
+offset_right = 121.0
+offset_bottom = 16.0
+min_value = 0.5
+max_value = 16.0
+step = 0.25
+value = 4.0
+allow_greater = true
+tick_count = 8
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="TextEdit" type="TextEdit" parent="Component/Max" unique_id=1782453359]
+offset_left = 72.0
+offset_top = 16.0
+offset_right = 139.0
+offset_bottom = 52.0
+text = "4.0"
+placeholder_text = "4.0"
+
+[node name="Time" type="Node2D" parent="Component" unique_id=2056013791]
+position = Vector2(64, -56)
+
+[node name="HSlider" type="HSlider" parent="Component/Time" unique_id=350563340]
 offset_right = 121.0
 offset_bottom = 16.0
 min_value = 0.25
-max_value = 8.0
+max_value = 4.0
 step = 0.25
 value = 2.0
 allow_greater = true
@@ -49,7 +123,7 @@ tick_count = 8
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="TextEdit" type="TextEdit" parent="Component" unique_id=97604173]
+[node name="TextEdit" type="TextEdit" parent="Component/Time" unique_id=268260357]
 offset_top = 18.0
 offset_right = 67.0
 offset_bottom = 54.0
@@ -57,5 +131,11 @@ text = "2.0"
 placeholder_text = "2.0"
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_button_pressed"]
-[connection signal="value_changed" from="Component/HSlider" to="." method="_on_slider_changed"]
-[connection signal="text_changed" from="Component/TextEdit" to="." method="_on_text_changed"]
+[connection signal="toggled" from="Component/SlimButton" to="." method="_on_slim_toggled"]
+[connection signal="toggled" from="Component/AbsButton" to="." method="_on_abs_toggled"]
+[connection signal="value_changed" from="Component/Min/HSlider" to="." method="_on_min_slider_changed"]
+[connection signal="text_changed" from="Component/Min/TextEdit" to="." method="_on_min_text_changed"]
+[connection signal="value_changed" from="Component/Max/HSlider" to="." method="_on_max_slider_changed"]
+[connection signal="text_changed" from="Component/Max/TextEdit" to="." method="_on_max_text_changed"]
+[connection signal="value_changed" from="Component/Time/HSlider" to="." method="_on_time_slider_changed"]
+[connection signal="text_changed" from="Component/Time/TextEdit" to="." method="_on_time_text_changed"]

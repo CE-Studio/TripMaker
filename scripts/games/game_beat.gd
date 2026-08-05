@@ -69,10 +69,7 @@ func _update_debug_label() -> void:
 
 func add_obj(attributes:Array) -> void:
 	var new_obj:BeatObject = obj.instantiate()
-	new_obj.target_pos = Vector2(float(attributes[0]), float(attributes[3]))
-	new_obj.type = attributes[1]
-	new_obj.speed = attributes[4]
-	new_obj.angle = attributes[5]
+	new_obj.load_attributes(attributes)
 	append_obj(new_obj)
 	new_obj.tick(ticks)
 

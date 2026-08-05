@@ -82,15 +82,14 @@ func set_mode(_mode:int) -> void:
 	super(_mode)
 	if mode == 2:
 		text_edited_this_frame = true
-		handle.mouse_filter = Control.MOUSE_FILTER_STOP
+		_enable_control(handle, false)
 		_update_handle_position()
-		text.mouse_filter = Control.MOUSE_FILTER_STOP
-		text.text = str(obj.angle)
-		cycle.mouse_filter = Control.MOUSE_FILTER_STOP
+		_enable_control(text, str(obj.angle))
+		_enable_control(cycle, false)
 	else:
-		handle.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		cycle.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_disable_control(handle)
+		_disable_control(text)
+		_disable_control(cycle)
 
 
 func return_target_value() -> Variant:

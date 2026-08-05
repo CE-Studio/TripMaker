@@ -67,6 +67,21 @@ func set_mode(_mode:int) -> void:
 		button.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
+## Shortcut function that enables components
+func _enable_control(ctrl:Control, value:Variant) -> void:
+	ctrl.mouse_filter = Control.MOUSE_FILTER_STOP
+	if ctrl is TextureButton:
+		ctrl.button_pressed = bool(value)
+	elif ctrl is HSlider or ctrl is VSlider:
+		ctrl.value = float(value)
+	elif ctrl is TextEdit:
+		ctrl.text = str(value)
+
+## Shortcut function that disables components
+func _disable_control(ctrl:Control) -> void:
+	ctrl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
 ## Returns the value of whatever object attribute this widget is set to configure
 func return_target_value() -> Variant:
 	return null

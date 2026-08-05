@@ -2,7 +2,10 @@ class_name TypeExtension
 extends Node
 
 
-var obj:EditorObject
+var e_obj:EditorObject
+var g_obj:BeatObject
+
+var edit_mode:bool = false
 
 
 func save_to_string() -> PackedStringArray:
